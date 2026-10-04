@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHAMS</title>
-<meta name="description" content="SHAMS">
+<title>SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic</title>
+<meta name="description" content="SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta property="og:title" content="SHAMS">
@@ -14,42 +14,270 @@
     --ground: #faf9f7;
     --ink: #1c1c1c;
     --accent: #eb6a2e;
+    --muted: #5b5853;
+    --rule: #e4e0da;
+    --panel: #f2efea;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --arabic: "Noto Naskh Arabic", "Geeza Pro", "Al Nile", "Traditional Arabic", "Arabic Typesetting", "Segoe UI", Tahoma, serif;
   }
-  html { color-scheme: light; }
+  html { color-scheme: light; -webkit-text-size-adjust: 100%; }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
     background: var(--ground);
     color: var(--ink);
+    font: 17px/1.6 var(--sans);
   }
   main {
-    width: 100%;
-    max-width: 560px;
-    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 16px 64px;
   }
-  img {
+  a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  header { text-align: center; }
+  h1 { margin: 0; font-weight: 600; }
+  h1 img {
     width: 100%;
+    max-width: 260px;
     height: auto;
     display: block;
+    margin: 0 auto 24px;
     animation: rise 900ms cubic-bezier(.2,.7,.2,1) both;
   }
+  h1 .subtitle { display: block; font-size: clamp(1.35rem, 4.6vw, 1.9rem); line-height: 1.25; }
   @keyframes rise {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: none; }
   }
+
+  .authors {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+  .authors li { line-height: 1.35; }
+  .authors strong { display: block; font-weight: 600; }
+  .authors span { color: var(--muted); font-size: .92rem; }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 150ms, color 150ms, border-color 150ms;
+  }
+  .button:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  section { margin-top: 56px; }
+  h2 {
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  p { margin: 0 0 1em; }
+  .note { color: var(--muted); font-size: .92rem; }
+
+  ol.tiers, dl.tasks { margin: 0; padding: 0; }
+  ol.tiers { list-style: none; }
+  ol.tiers li {
+    display: grid;
+    grid-template-columns: 2.4em minmax(0, 1fr);
+    gap: 4px 8px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  ol.tiers .n { color: var(--accent); font-weight: 600; }
+  .example {
+    grid-column: 2;
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 4px 12px;
+    overflow-wrap: anywhere;
+  }
+  .example[lang="ar"] { font-family: var(--arabic); font-size: 1.35rem; line-height: 1.8; text-align: right; }
+  .example.latin { font-size: 1.05rem; }
+
+  dl.tasks div { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  dl.tasks dt { font-weight: 600; }
+  dl.tasks dt .io { font-weight: 400; color: var(--muted); font-size: .92rem; margin-left: .4em; }
+  dl.tasks dd { margin: 2px 0 0; }
+
+  .table-wrap { max-width: 100%; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .95rem; }
+  caption { caption-side: bottom; text-align: left; padding-top: 10px; color: var(--muted); font-size: .88rem; }
+  th, td { padding: 8px 6px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+  thead th { border-bottom: 1.5px solid var(--ink); font-weight: 600; }
+  tfoot td, tfoot th { border-top: 1.5px solid var(--ink); border-bottom: none; font-weight: 600; }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  td.src { color: var(--muted); }
+
+  pre {
+    margin: 0;
+    padding: 14px 16px;
+    background: var(--panel);
+    border-radius: 6px;
+    font: .85rem/1.55 var(--mono);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  code { font-family: var(--mono); font-size: .9em; }
+
+  footer { margin-top: 56px; text-align: center; color: var(--muted); font-size: .88rem; }
+
+  @media (max-width: 560px) {
+    main { padding-top: 32px; }
+    .authors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    th, td { padding: 7px 4px; }
+    table { font-size: .9rem; }
+    .hide-narrow { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
-    img { animation: none; }
+    h1 img { animation: none; }
+    .button { transition: none; }
   }
 </style>
 </head>
 <body>
-  <main>
-    <img src="shams-logo.png" alt="SHAMS" width="1147" height="868">
-  </main>
+<main>
+  <header>
+    <h1>
+      <img src="shams-logo.png" alt="SHAMS" width="1147" height="868">
+      <span class="subtitle">An Audio-Grounded Pronunciation Benchmark for Levantine Arabic</span>
+    </h1>
+
+    <ul class="authors" aria-label="Authors">
+      <li><strong>Ben Sapirstein</strong><span>Reichman University</span></li>
+      <li><strong>Roy Mattar</strong><span>Independent Researcher</span></li>
+      <li><strong>Guy Mor-Lan</strong><span>The Hebrew University of Jerusalem</span></li>
+      <li><strong>Ahlam Mohamed</strong><span>Tel Aviv University</span></li>
+      <li><strong>Letizia Cerqueglini</strong><span>Tel Aviv University</span></li>
+      <li><strong>Morris Alper</strong><span>University of Miami</span></li>
+    </ul>
+
+    <ul class="links">
+      <li><a class="button" href="https://huggingface.co/datasets/shams-nlp/shams">Data</a></li>
+      <li><a class="button" href="https://github.com/bensapirstein/shams">Code and model outputs</a></li>
+    </ul>
+  </header>
+
+  <section id="abstract" aria-labelledby="h-abstract">
+    <h2 id="h-abstract">Abstract</h2>
+    <p>Levantine Arabic (LA) is spoken by tens of millions of people, creating a pressing need for shared benchmarks to evaluate LA speech-language technologies. Evaluating such technology is particularly challenging given LA’s internal diversity and its opaque and non-standardized orthography.</p>
+    <p>We present SHAMS (<em>SHami Annotated Multi-dialect Speech</em>), a benchmark comprising 1,300 utterances drawn from open audio corpora, balanced across five LA varieties (Urban and Rural Palestinian, and Urban Jordanian, Lebanese, and Syrian). Each utterance is represented across four aligned tiers: audio, unvocalized orthography, diacritized text, and phonetic transcription. This structure supports evaluation of various downstream tasks such as diacritization, grapheme-to-phoneme conversion, automatic speech recognition, and audio-to-phoneme, grounded in audio and stratified by variety. We benchmark open and proprietary models across these tasks to demonstrate the utility of this benchmark for measuring progress across LA.</p>
+  </section>
+
+  <section id="gap" aria-labelledby="h-gap">
+    <h2 id="h-gap">The gap</h2>
+    <p>Even fully diacritized orthography leaves dialectal pronunciation underspecified: for example, the realization of <span lang="ar" dir="rtl" style="font-family: var(--arabic)">ق</span> is not recoverable from the script.</p>
+    <p>Automating this transcription could relieve the bottleneck, but for LA there has been no way to measure how well current systems perform the task.</p>
+    <p>Diacritization has been studied extensively for MSA, with more limited work on G2P and Arabic dialects. These efforts address individual tasks in isolation, and neither source corpus provides diacritics, a phonetic tier, or variety-level stratification; our novel contribution is an evaluation that ties diacritization, G2P, ASR, and A2P together over the same utterances, grounded in audio and stratified by LA variety.</p>
+  </section>
+
+  <section id="tiers" aria-labelledby="h-tiers">
+    <h2 id="h-tiers">Four aligned tiers</h2>
+    <p>Each utterance in SHAMS includes four aligned tiers:</p>
+    <ol class="tiers">
+      <li><span class="n">(i)</span><span>the audio segment;</span></li>
+      <li><span class="n">(ii)</span><span>unvocalized Arabic orthography, the consonantal text as conventionally written, corrected when needed to match the recording;</span>
+        <span class="example" lang="ar" dir="rtl">بقدر أروح بكرا</span></li>
+      <li><span class="n">(iii)</span><span>fully diacritized Arabic, the same text with conventional diacritics matching the pronunciation in the audio;</span>
+        <span class="example" lang="ar" dir="rtl">بَقدَر أَرُوح بُكرَا</span></li>
+      <li><span class="n">(iv)</span><span>a phonetic transcription in a Semitic transcription system.</span>
+        <span class="example latin">bakdar ʾarūḥ bučra</span></li>
+    </ol>
+    <p class="note" style="margin-top:10px">Example from Figure 2 of the paper.</p>
+  </section>
+
+  <section id="tasks" aria-labelledby="h-tasks">
+    <h2 id="h-tasks">Four tasks</h2>
+    <dl class="tasks">
+      <div>
+        <dt>Diacritization <span class="io">(ii) → (iii) · DER</span></dt>
+        <dd>Restoring vowel and gemination marks.</dd>
+      </div>
+      <div>
+        <dt>Grapheme-to-phoneme conversion (G2P) <span class="io">(ii) → (iv) · CER</span></dt>
+        <dd>Mapping orthography to phonetic transcription.</dd>
+      </div>
+      <div>
+        <dt>Automatic speech recognition (ASR) <span class="io">(i) → (ii) · WER, CER</span></dt>
+        <dd>Transcribing audio to text.</dd>
+      </div>
+      <div>
+        <dt>Audio-to-phoneme conversion (A2P) <span class="io">(i) → (iv) · CER</span></dt>
+        <dd>Transcribing audio to phonetic transcription.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="composition" aria-labelledby="h-composition">
+    <h2 id="h-composition">Composition</h2>
+    <p>SHAMS comprises 1,300 utterances totaling roughly 15,500 words and just over two hours of speech, spread across five Levantine varieties. The benchmark is built on the Levantine portions of two open multi-dialectal Arabic speech corpora, Casablanca and LangMedia.</p>
+    <div class="table-wrap">
+      <table>
+        <caption>SHAMS composition by variety: utterances, words, and duration in minutes (Table 1 of the paper). Palestinian Urban and Jordanian each draw on both source corpora; Palestinian Rural comes from Casablanca only, and Lebanese and Syrian from LangMedia only.</caption>
+        <thead>
+          <tr><th scope="col">Variety</th><th scope="col" class="hide-narrow">Source</th><th scope="col" class="num">Utt.</th><th scope="col" class="num">Words</th><th scope="col" class="num">Min.</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Pal./Urban</th><td class="src hide-narrow">both</td><td class="num">230</td><td class="num">3,175</td><td class="num">25.0</td></tr>
+          <tr><th scope="row">Pal./Rural</th><td class="src hide-narrow">Casablanca</td><td class="num">234</td><td class="num">3,153</td><td class="num">21.8</td></tr>
+          <tr><th scope="row">Jordanian</th><td class="src hide-narrow">both</td><td class="num">305</td><td class="num">3,173</td><td class="num">25.5</td></tr>
+          <tr><th scope="row">Lebanese</th><td class="src hide-narrow">LangMedia</td><td class="num">316</td><td class="num">3,008</td><td class="num">29.1</td></tr>
+          <tr><th scope="row">Syrian</th><td class="src hide-narrow">LangMedia</td><td class="num">215</td><td class="num">2,997</td><td class="num">26.7</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row">Total</th><td class="hide-narrow"></td><td class="num">1,300</td><td class="num">15,506</td><td class="num">128.2</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+  <section id="use" aria-labelledby="h-use">
+    <h2 id="h-use">How to use</h2>
+    <p>Data: <a href="https://huggingface.co/datasets/shams-nlp/shams">huggingface.co/datasets/shams-nlp/shams</a>.<br>
+       Evaluation code and model outputs: <a href="https://github.com/bensapirstein/shams">github.com/bensapirstein/shams</a>.</p>
+    <p>Every score is computed after an evaluation-time normalization, applied symmetrically to references and hypotheses, at two levels. The strict tier scores the output as written; the neutral tier additionally folds spelling and notation that carry no phonemic contrast in Levantine.</p>
+  </section>
+
+  <section id="cite" aria-labelledby="h-cite">
+    <h2 id="h-cite">Citation</h2>
+<pre><code>@misc{shams,
+  title  = {{SHAMS}: An Audio-Grounded Pronunciation Benchmark for {L}evantine {A}rabic},
+  author = {Sapirstein, Ben and Mattar, Roy and Mor-Lan, Guy and
+            Mohamed, Ahlam and Cerqueglini, Letizia and Alper, Morris},
+  url    = {https://shams-nlp.github.io}
+}</code></pre>
+  </section>
+
+  <section id="license" aria-labelledby="h-license">
+    <h2 id="h-license">License</h2>
+    <p>SHAMS annotations are released under terms consistent with each source corpus’s license. Utterances sourced from LangMedia and accompanying annotations are released in compliance with LangMedia’s CC BY-SA license. Annotations linked to Casablanca utterances are released with identifiers without redistributing audio; written correspondence with its authors confirmed this format is consistent with their CC BY-NC-ND license. Full license terms are provided with the released dataset.</p>
+  </section>
+
+  <footer>SHAMS · shams-nlp.github.io</footer>
+</main>
 </body>
 </html>
