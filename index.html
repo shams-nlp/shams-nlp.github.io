@@ -21,16 +21,13 @@
     --ink: #201C3C;
     --flame: #E84226;      /* title line 2, stat numbers, logo dots */
     --ember: #E06945;      /* section headings */
-    --sun: #E36A2A;        /* best bar */
     --coral: #E56B6F;
     --sky: #4D8AC8;
     --violet: #876BAD;
-    --violet-bar: #875FA5;
     --lilac: #A894C4;
     --magenta: #B961A2;
     --peach: #FBE4D5;
     --pale-blue: #DBE2E5;
-    --band: #F6EDE2;
     --wine: #9D1E46;
     --muted: #4F4F4E;
     /* Open look-alikes of the poster PDF's fonts: Aktiv Grotesk -> Inter Tight; Source Sans 3 (as in the poster);
@@ -64,18 +61,6 @@
 
   /* ---------- hero ---------- */
   .hero { position: relative; padding: 56px 0 0; overflow: hidden; }
-  .sun {
-    position: absolute; z-index: 0;
-    width: 400px; aspect-ratio: 1; border-radius: 50%;
-    right: max(-150px, calc((100vw - var(--wrap)) / -2 - 40px));
-    top: -150px;
-    background:
-      radial-gradient(circle, rgba(252,249,241,.16) 1.1px, transparent 1.6px) 0 0 / 7px 7px,
-      var(--flame);
-    display: grid; place-items: center;
-    color: var(--ivory); --dot: var(--peach);
-  }
-  .sun svg { width: 40%; margin: 150px 150px 0 0; }
   .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 0 48px; align-items: center; }
   .brand { text-align: center; color: var(--ink); }
   .brand svg { width: 100%; height: auto; display: block; }
@@ -162,27 +147,10 @@
   .tasks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .tasks li { border-top: 3px solid var(--ink); padding-top: 8px; font-size: 15.5px; line-height: 1.45; }
   .tasks b { display: block; font: 700 16px/1.3 var(--head); }
-  .tasks .io { display: block; font: 500 13px/1.5 var(--head); color: var(--violet); margin-bottom: 4px; }
   h3.sub { font: 600 15px/1.2 var(--head); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 14px; color: var(--ink); }
 
-  /* ---------- qaf ---------- */
-  .qaf { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 0 44px; align-items: center; }
-  .qaf .glyph {
-    font: 400 150px/1 var(--arabic); color: var(--peach); text-align: center;
-    -webkit-text-stroke: 3px var(--coral); paint-order: stroke fill;
-    text-shadow: 3px 3px 0 var(--ink);
-    padding-bottom: 30px;
-  }
-  .reflex { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-  .reflex li { padding: 4px 22px 6px; border-left: 3px dotted var(--ink); }
-  .reflex li:first-child { border-left: 0; padding-left: 0; }
-  .reflex .who { font: 600 15px/1.3 var(--head); text-transform: uppercase; letter-spacing: .05em; }
-  .reflex .seg { display: block; font: 600 36px/1.2 var(--body); color: var(--flame); margin: 6px 0 2px; }
-  .reflex .w { font-size: 15.5px; color: var(--muted); }
-  .reflex .w i { color: var(--ink); }
-
   /* ---------- composition ---------- */
-  .comp { display: grid; grid-template-columns: minmax(0, 1fr) 3px minmax(0, 1fr); gap: 0 44px; align-items: start; }
+  .comp { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 760px; }
   table { border-collapse: collapse; font-variant-numeric: tabular-nums; }
   .t1 { width: 100%; font-size: 16px; }
   .t1 caption { caption-side: bottom; text-align: left; font-size: 14.5px; line-height: 1.5; color: var(--muted); padding-top: 12px; }
@@ -193,73 +161,6 @@
   .t1 tfoot td, .t1 tfoot th { border-bottom: 0; border-top: 3px solid var(--ink); font-weight: 600; }
   .dot { display: inline-block; width: 13px; height: 13px; border-radius: 50%; margin-right: 9px; vertical-align: -1px; background: var(--c); }
   .wbar { display: inline-block; height: 9px; width: calc(var(--w) * 1px); background: var(--c); border-radius: 0 5px 5px 0; margin-right: 10px; vertical-align: 1px; opacity: .85; }
-  .iaa { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0 0 20px; }
-  .iaa div { padding: 14px 16px 12px; }
-  .iaa .n { display: block; font: 700 34px/1 var(--head); color: var(--flame); }
-  .iaa .l { display: block; font: 600 14px/1.35 var(--head); margin-top: 6px; }
-
-  /* ---------- results band ---------- */
-  .band { background: var(--band); margin-top: 64px; padding: 52px 0 46px; border-top: 3px solid var(--ink); }
-  .band h2 { margin-bottom: 6px; }
-  .band .lede { font-size: 16px; color: var(--muted); margin-bottom: 30px; }
-  .panels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .panel { padding: 0 26px; border-left: 3px dotted var(--ink); display: flex; flex-direction: column; }
-  .panel:first-child { border-left: 0; padding-left: 0; }
-  .panel:last-child { padding-right: 0; }
-  .panel-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-  .ticon { width: 58px; height: 58px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; flex: none; background: var(--ivory); }
-  .panel:nth-child(odd) .ticon { border-color: var(--flame); color: var(--flame); }
-  .ticon svg { width: 40px; height: 40px; fill: currentColor; }
-  .ticon text { font-family: var(--arabic); }
-  .ticon text.mono { font-family: var(--body); font-weight: 600; }
-  .panel h3 { margin: 0; font: 700 18px/1.15 var(--head); text-transform: uppercase; letter-spacing: .03em; }
-  .metric { margin: 3px 0 0; font: 500 13px/1 var(--head); color: var(--muted); }
-  .bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
-  .bar { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 10px; align-items: center; }
-  .bar .m { font: 400 12.5px/1.2 var(--head); text-align: right; color: var(--ink); }
-  .bar.best .m { font-weight: 700; }
-  .track { position: relative; height: 20px; }
-  .fill {
-    position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); background: var(--violet-bar);
-    transform-origin: left; animation: grow .9s cubic-bezier(.2,.7,.2,1) both;
-  }
-  .bar.best .fill { background: var(--sun); }
-  .bar.excl .fill { background: repeating-linear-gradient(135deg, var(--lilac) 0 4px, #C9BCDD 4px 7px); }
-  .v { position: absolute; left: calc(var(--w) + 6px); top: 0; font: 500 13px/20px var(--head); color: var(--violet-bar); white-space: nowrap; }
-  .bar.best .v { color: var(--sun); font-weight: 700; }
-  .bar.excl .v { color: var(--violet); }
-  .ast { font: 700 .8em/0 var(--head); color: var(--flame); margin-left: 1px; }
-  .axis { position: relative; height: 22px; margin: 8px 0 0 122px; border-top: 1.5px solid var(--ink); font: 400 11.5px/1 var(--head); color: var(--muted); }
-  .axis span { position: absolute; left: var(--x); top: 6px; transform: translateX(-50%); }
-  .axis span::before { content: ""; position: absolute; left: 50%; top: -10px; height: 5px; border-left: 1.5px solid var(--ink); }
-  .panel-note { font-size: 14.5px; line-height: 1.5; margin: 14px 0 0; color: var(--ink); }
-  .keys { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 30px 0 0; padding: 16px 0 0; border-top: 2px dotted #BDB5C2; font-size: 14px; line-height: 1.5; color: var(--muted); }
-  .keys > span { display: inline-flex; align-items: baseline; gap: 8px; }
-  .sw { display: inline-block; width: 22px; height: 11px; flex: none; }
-  .keys p { margin: 0; flex-basis: 100%; }
-  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-
-  details.full { margin-top: 26px; }
-  details.full summary {
-    cursor: pointer; display: inline-flex; align-items: center; gap: 10px; list-style: none;
-    font: 600 15px/1 var(--head); padding: 11px 20px; border: 2px solid var(--ink); border-radius: 999px; background: var(--ivory);
-  }
-  details.full summary::-webkit-details-marker { display: none; }
-  details.full summary::after { content: "+"; font-size: 18px; color: var(--flame); }
-  details.full[open] summary::after { content: "–"; }
-  .tables { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 40px; margin-top: 26px; }
-  .tscroll { overflow-x: auto; max-width: 100%; }
-  table.res { font-size: 14px; width: 100%; }
-  table.res caption { text-align: left; font: 600 14px/1.3 var(--head); padding-bottom: 8px; }
-  table.res th, table.res td { padding: 5px 7px; text-align: right; white-space: nowrap; border-bottom: 1px solid #E2D7CA; }
-  table.res thead th { font: 500 12px/1.25 var(--head); white-space: normal; vertical-align: bottom; border-bottom: 2px solid var(--ink); min-width: 52px; }
-  table.res tbody th { text-align: left; font: 400 13px/1.2 var(--head); }
-  table.res tbody th[scope="row"], table.res thead td { position: sticky; left: 0; background: var(--band); z-index: 1; }
-  table.res tr.ov th, table.res tr.ov td { border-top: 1.5px solid var(--ink); }
-  table.res tr.ov th { font-weight: 700; }
-  table.res tr.blk th { text-align: left; font: italic 400 13px/1 var(--body); padding-top: 12px; color: var(--muted); border-bottom: 0; }
-  table.res td b { color: var(--sun); }
-  .tables .wide { grid-column: 1 / -1; }
 
   /* ---------- cite, footer ---------- */
   .three { display: grid; grid-template-columns: minmax(0, 1.3fr) 3px minmax(0, 1fr); gap: 0 44px; }
@@ -283,10 +184,6 @@
 
   /* ---------- responsive ---------- */
   @media (max-width: 1100px) {
-    .panels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 0; }
-    .panel:nth-child(3) { border-left: 0; padding-left: 0; }
-    .panel:nth-child(2) { padding-right: 0; }
-    .tables { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 150px minmax(0, 1fr); gap: 0 28px; }
@@ -295,8 +192,6 @@
     .teaser, .split, .comp, .three, .absgrid { grid-template-columns: minmax(0, 1fr); }
     .teaser > .dotted-v, .split > .dotted-v, .comp > .dotted-v, .three > .dotted-v, .absgrid > .dotted-v { border-left: 0; border-top: 3px dotted var(--ink); margin: 40px 0 0; height: 0; }
     .stats ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 18px; }
-    .sun { width: 300px; top: -130px; right: -120px; }
-    .sun svg { margin: 130px 120px 0 0; }
   }
   @media (max-width: 640px) {
     body { font-size: 17px; }
@@ -304,8 +199,6 @@
     .hero-grid { grid-template-columns: minmax(0, 1fr); }
     .brand { width: 168px; margin: 0 0 22px; text-align: left; }
     .brand .exp { white-space: nowrap; }
-    .sun { width: 230px; top: -95px; right: -95px; }
-    .sun svg { margin: 95px 95px 0 0; }
     .authors { grid-template-columns: repeat(2, minmax(0, 1fr)); font-size: 16.5px; gap: 16px 14px; text-align: left; }
     .pill { padding: 10px 20px 10px 14px; }
     section { padding-top: 44px; }
@@ -319,24 +212,13 @@
     .tldr { grid-template-columns: minmax(0, 1fr); padding: 18px 18px 18px 20px; }
     .tldr p { font-size: 18px; }
     .tasks { grid-template-columns: minmax(0, 1fr); }
-    .qaf { grid-template-columns: minmax(0, 1fr); }
-    .qaf .glyph { font-size: 110px; text-align: left; padding: 0 0 6px 8px; }
-    .reflex { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-    .reflex li, .reflex li:first-child { border-left: 3px dotted var(--ink); padding: 2px 0 4px 16px; }
-    .iaa .n { font-size: 28px; }
-    .t1 .src { display: none; }
+      .t1 .src { display: none; }
     .t1 th, .t1 td { padding: 8px 5px; }
     .t1 .wbar { display: none; }
-    .panels { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-    .panel, .panel:nth-child(n) { border-left: 0; padding: 0; }
-    .panel + .panel { border-top: 3px dotted var(--ink); padding-top: 32px; }
-    .bar { grid-template-columns: 118px minmax(0, 1fr); }
-    .axis { margin-left: 128px; }
     footer.site .wrap { flex-direction: column; align-items: flex-start; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .fill { animation: none; }
     .pill, .pill:hover { transition: none; transform: none; }
   }
 
@@ -369,7 +251,6 @@
 </svg>
 
 <header class="hero" id="top">
-  <div class="sun" aria-hidden="true"><svg viewBox="0 0 1160 540"><use href="#mark"/></svg></div>
   <div class="wrap">
     <div class="hero-grid">
       <div class="brand" aria-hidden="true">
@@ -389,6 +270,7 @@
         <li><b>Morris Alper</b>University of Miami</li>
       </ul>
       <ul class="links" aria-label="Links">
+        <li><a class="pill" href="https://arxiv.org/abs/2610.01427"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.5 0.5H12L17.5 6V18.5A1 1 0 0 1 16.5 19.5H4.5A1 1 0 0 1 3.5 18.5V1.5A1 1 0 0 1 4.5 0.5Z"/><path fill="none" stroke="var(--icon-bg)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M12 1V5A1 1 0 0 0 13 6H17"/><path fill="none" stroke="var(--icon-bg)" stroke-width="1.5" stroke-linecap="round" d="M6.5 10H14.5M6.5 13H14.5M6.5 16H11"/></svg>Paper</a></li>
         <li><a class="pill" href="https://github.com/bensapirstein/shams"><svg viewBox="84 7399 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"/></svg>Code</a></li>
         <li><a class="pill" href="https://huggingface.co/datasets/shams-nlp/shams"><svg viewBox="0 0 500 463" aria-hidden="true" focusable="false"> <path d="M496.592 369.699C500.563 381.093 499.61 393.227 494.315 403.778C490.503 411.48 485.05 417.441 478.379 422.769C470.331 429.099 460.324 434.48 448.253 439.65C433.852 445.77 416.274 451.52 408.226 453.63C387.63 458.958 367.829 462.334 347.762 462.493C319.066 462.756 294.34 456.004 276.762 438.753C267.656 439.861 258.443 440.494 249.178 440.494C240.389 440.494 231.706 439.967 223.076 438.912C205.445 456.057 180.825 462.756 152.234 462.493C132.168 462.334 112.366 458.958 91.7177 453.63C83.7229 451.52 66.145 445.77 51.7439 439.65C39.6723 434.48 29.6656 429.099 21.6708 422.769C14.9467 417.441 9.49334 411.48 5.68127 403.778C0.439661 393.227 -0.566304 381.093 3.45755 369.699C-0.248631 360.994 -1.20165 351.024 1.71035 339.998C3.03399 334.987 5.20476 330.344 7.95792 326.229C7.37552 324.067 6.89901 321.851 6.58134 319.424C4.56941 304.97 9.59923 291.781 19.0765 281.547C23.7357 276.43 28.7655 272.895 34.0071 270.627C30.1421 254.273 28.1302 237.445 28.1302 220.247C28.1302 98.5969 127.085 0 249.178 0C291.111 0 330.343 11.6058 363.805 31.8633C369.84 35.5561 375.77 39.5126 381.436 43.7329C384.242 45.8431 387.048 48.006 389.748 50.2744C392.501 52.49 395.201 54.8112 397.796 57.1851C405.632 64.3069 412.991 71.9562 419.715 80.133C421.992 82.8235 424.163 85.6194 426.28 88.4681C430.569 94.1128 434.54 99.9685 438.193 106.035C443.752 115.109 448.623 124.604 452.859 134.469C455.665 141.064 458.101 147.816 460.271 154.727C463.501 165.067 465.99 175.723 467.684 186.696C468.213 190.336 468.69 194.028 469.06 197.721C469.802 205.107 470.225 212.598 470.225 220.247C470.225 237.234 468.213 253.904 464.454 269.994C470.278 272.262 475.784 275.955 480.92 281.547C490.397 291.781 495.427 305.022 493.415 319.477C493.098 321.851 492.621 324.067 492.039 326.229C494.792 330.344 496.963 334.987 498.286 339.998C501.198 351.024 500.245 360.994 496.592 369.699Z" style="fill:var(--icon-bg)"/> <path d="M433.839 221.75C433.839 120.838 351.531 39.0323 250 39.0323C148.469 39.0323 66.1613 120.838 66.1613 221.75C66.1613 322.662 148.469 404.468 250 404.468C351.531 404.468 433.839 322.662 433.839 221.75ZM45 221.75C45 109.222 136.782 18 250 18C363.218 18 455 109.222 455 221.75C455 334.278 363.218 425.5 250 425.5C136.782 425.5 45 334.278 45 221.75Z" fill="currentColor"/> <path d="M250 405.5C352.173 405.5 435 323.232 435 221.75C435 120.268 352.173 38 250 38C147.827 38 65 120.268 65 221.75C65 323.232 147.827 405.5 250 405.5Z" style="fill:var(--icon-bg)"/> <path d="M202.198 404.174C216.789 383.118 215.755 367.316 195.735 347.627C175.715 327.943 164.062 299.145 164.062 299.145C164.062 299.145 159.709 282.419 149.794 283.958C139.88 285.497 132.6 310.492 153.368 325.783C174.135 341.069 149.232 351.456 141.242 337.099C133.252 322.741 111.435 285.831 100.121 278.772C88.8117 271.713 80.8483 275.668 83.5151 290.218C86.182 304.769 133.48 340.036 128.878 347.668C124.276 355.296 108.058 338.7 108.058 338.7C108.058 338.7 57.3079 293.255 46.2587 305.097C35.2096 316.94 54.641 326.863 82.3328 343.359C110.03 359.85 112.177 364.206 108.248 370.446C104.314 376.685 43.1836 325.971 37.4417 347.47C31.705 368.969 99.8291 375.209 95.6247 390.051C91.4203 404.899 47.6372 361.958 38.6823 378.689C29.7221 395.425 100.465 415.088 101.038 415.234C123.889 421.067 181.924 433.426 202.198 404.174Z" style="fill:var(--icon-bg)"/> <path d="M90.9935 255C82.4744 255 74.8603 258.477 69.551 264.784C66.2675 268.69 62.8367 274.986 62.5578 284.414C58.985 283.394 55.5489 282.824 52.3391 282.824C44.183 282.824 36.8163 285.93 31.6069 291.573C24.9137 298.815 21.9407 307.715 23.2351 316.62C23.8508 320.861 25.2768 324.663 27.4079 328.182C22.9142 331.795 19.6044 336.826 18.0047 342.876C16.7524 347.619 15.4685 357.497 22.1722 367.673C21.746 368.337 21.3461 369.027 20.9725 369.733C16.9418 377.336 16.684 385.927 20.2411 393.928C25.6346 406.054 39.0368 415.608 65.0625 425.863C81.2536 432.242 96.0661 436.321 96.1976 436.357C117.603 441.874 136.962 444.677 153.721 444.677C184.525 444.677 206.578 435.301 219.27 416.811C239.697 387.036 236.776 359.803 210.346 333.552C195.717 319.026 185.993 297.607 183.967 292.906C179.884 278.986 169.086 263.513 151.138 263.513H151.133C149.622 263.513 148.096 263.633 146.592 263.869C138.73 265.097 131.858 269.595 126.949 276.361C121.65 269.814 116.504 264.606 111.847 261.667C104.827 257.243 97.813 255 90.9935 255ZM90.9935 275.917C93.6771 275.917 96.9553 277.051 100.57 279.331C111.794 286.406 133.452 323.403 141.382 337.793C144.039 342.614 148.581 344.654 152.669 344.654C160.783 344.654 167.118 336.638 153.411 326.451C132.8 311.124 140.03 286.072 149.87 284.529C150.301 284.461 150.727 284.43 151.138 284.43C160.083 284.43 164.03 299.751 164.03 299.751C164.03 299.751 175.595 328.616 195.465 348.346C215.334 368.08 216.36 383.919 201.879 405.024C192.002 419.415 173.096 421.292 153.721 421.292C133.626 421.292 112.99 417.772 101.445 414.796C100.877 414.65 30.7019 396.255 39.5946 379.48C41.089 376.661 43.5516 375.532 46.6509 375.532C59.1744 375.532 81.9535 394.054 91.746 394.054C93.935 394.054 95.5662 392.371 96.1976 390.112C100.555 374.522 32.6646 369.738 38.3633 348.189C39.3683 344.377 42.094 342.829 45.9248 342.834C62.4737 342.834 99.6021 371.756 107.385 371.756C107.979 371.756 108.405 371.584 108.637 371.218C112.536 364.964 110.74 359.872 83.257 343.343C55.7738 326.808 36.1428 317.588 47.114 305.718C48.3768 304.347 50.1659 303.741 52.3391 303.741C69.0248 303.746 108.447 339.398 108.447 339.398C108.447 339.398 119.087 350.395 125.523 350.395C127.001 350.395 128.259 349.815 129.111 348.382C133.673 340.737 86.7366 305.388 84.0898 290.804C82.2955 280.921 85.3474 275.917 90.9935 275.917Z" fill="currentColor"/> <path d="M296.9 404.174C282.31 383.118 283.343 367.316 303.363 347.627C323.383 327.943 335.037 299.145 335.037 299.145C335.037 299.145 339.39 282.419 349.304 283.958C359.219 285.497 366.498 310.492 345.731 325.783C324.963 341.069 349.866 351.456 357.856 337.099C365.846 322.741 387.663 285.831 398.978 278.772C410.287 271.713 418.25 275.668 415.583 290.218C412.916 304.769 365.618 340.036 370.22 347.668C374.822 355.296 391.041 338.7 391.041 338.7C391.041 338.7 441.791 293.255 452.84 305.097C463.889 316.94 444.457 326.863 416.766 343.359C389.068 359.85 386.921 364.206 390.85 370.446C394.784 376.685 455.915 325.971 461.657 347.47C467.393 368.969 399.269 375.209 403.474 390.051C407.678 404.899 451.461 361.958 460.416 378.689C469.376 395.425 398.633 415.088 398.06 415.234C375.209 421.067 317.175 433.426 296.9 404.174Z" style="fill:var(--icon-bg)"/> <path d="M408.105 255C416.624 255 424.238 258.477 429.547 264.784C432.831 268.69 436.262 274.986 436.541 284.414C440.113 283.394 443.549 282.824 446.759 282.824C454.915 282.824 462.282 285.93 467.491 291.573C474.185 298.815 477.158 307.715 475.863 316.62C475.248 320.861 473.822 324.663 471.69 328.182C476.184 331.795 479.494 336.826 481.094 342.876C482.346 347.619 483.63 357.497 476.926 367.673C477.352 368.337 477.752 369.027 478.126 369.733C482.157 377.336 482.414 385.927 478.857 393.928C473.464 406.054 460.062 415.608 434.036 425.863C417.845 432.242 403.032 436.321 402.901 436.357C381.495 441.874 362.136 444.677 345.377 444.677C314.573 444.677 292.52 435.301 279.829 416.811C259.402 387.036 262.322 359.803 288.753 333.552C303.381 319.026 313.105 297.607 315.131 292.906C319.214 278.986 330.012 263.513 347.961 263.513H347.966C349.476 263.513 351.002 263.633 352.507 263.869C360.368 265.097 367.24 269.595 372.15 276.361C377.449 269.814 382.595 264.606 387.252 261.667C394.271 257.243 401.285 255 408.105 255ZM408.105 275.917C405.421 275.917 402.143 277.051 398.528 279.331C387.304 286.406 365.646 323.403 357.716 337.793C355.059 342.614 350.518 344.654 346.429 344.654C338.315 344.654 331.98 336.638 345.687 326.451C366.299 311.124 359.069 286.072 349.229 284.529C348.797 284.461 348.371 284.43 347.961 284.43C339.015 284.43 335.069 299.751 335.069 299.751C335.069 299.751 323.503 328.616 303.634 348.346C283.764 368.08 282.738 383.919 297.219 405.024C307.096 419.415 326.002 421.292 345.377 421.292C365.472 421.292 386.108 417.772 397.653 414.796C398.221 414.65 468.397 396.255 459.504 379.48C458.009 376.661 455.547 375.532 452.447 375.532C439.924 375.532 417.145 394.054 407.352 394.054C405.163 394.054 403.532 392.371 402.901 390.112C398.543 374.522 466.434 369.738 460.735 348.189C459.73 344.377 457.004 342.829 453.174 342.834C436.625 342.834 399.496 371.756 391.714 371.756C391.119 371.756 390.693 371.584 390.461 371.218C386.562 364.964 388.358 359.872 415.841 343.343C443.325 326.808 462.956 317.588 451.984 305.718C450.722 304.347 448.932 303.741 446.759 303.741C430.074 303.746 390.651 339.398 390.651 339.398C390.651 339.398 380.011 350.395 373.576 350.395C372.097 350.395 370.84 349.815 369.987 348.382C365.425 340.737 412.362 305.388 415.009 290.804C416.803 280.921 413.751 275.917 408.105 275.917Z" fill="currentColor"/> <path d="M319.277 228.901C319.277 205.236 288.585 241.304 250.637 241.465C212.692 241.306 182 205.238 182 228.901C182 244.591 189.507 270.109 209.669 285.591C213.681 271.787 235.726 260.729 238.877 262.317C243.364 264.578 243.112 270.844 250.637 276.365C258.163 270.844 257.911 264.58 262.398 262.317C265.551 260.729 287.594 271.787 291.605 285.591C311.767 270.109 319.275 244.591 319.275 228.903L319.277 228.901Z" fill="currentColor"/> <path d="M262.4 262.315C257.913 264.576 258.165 270.842 250.639 276.363C243.114 270.842 243.366 264.578 238.879 262.315C235.726 260.727 213.683 271.785 209.672 285.589C219.866 293.417 233.297 298.678 250.627 298.806C250.631 298.806 250.635 298.806 250.641 298.806C250.646 298.806 250.65 298.806 250.656 298.806C267.986 298.68 281.417 293.417 291.611 285.589C287.6 271.785 265.555 260.727 262.404 262.315H262.4Z" fill="#E56B6F"/> <path d="M373 196C382.389 196 390 188.389 390 179C390 169.611 382.389 162 373 162C363.611 162 356 169.611 356 179C356 188.389 363.611 196 373 196Z" fill="currentColor"/> <path d="M128 196C137.389 196 145 188.389 145 179C145 169.611 137.389 162 128 162C118.611 162 111 169.611 111 179C111 188.389 118.611 196 128 196Z" fill="currentColor"/> <path d="M313.06 171.596C319.796 173.968 322.476 187.779 329.281 184.171C342.167 177.337 347.06 161.377 340.208 148.524C333.356 135.671 317.354 130.792 304.467 137.626C291.58 144.46 286.688 160.419 293.54 173.272C296.774 179.339 307.039 169.475 313.06 171.596Z" fill="currentColor"/> <path d="M188.554 171.596C181.818 173.968 179.138 187.779 172.334 184.171C159.447 177.337 154.555 161.377 161.407 148.524C168.259 135.671 184.26 130.792 197.147 137.626C210.034 144.46 214.926 160.419 208.074 173.272C204.84 179.339 194.575 169.475 188.554 171.596Z" fill="currentColor"/> </svg>Data</a></li>
       </ul>
@@ -471,26 +353,10 @@
           </ol>
           <h3 class="sub">Four tasks</h3>
           <ul class="tasks">
-            <li><span class="io">(ii) → (iii) · DER</span><b>Diacritization</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Restoring vowel and gemination marks.</mark></li>
-            <li><span class="io">(ii) → (iv) · CER</span><b>G2P</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Grapheme-to-phoneme conversion: mapping orthography to phonetic transcription.</mark></li>
-            <li><span class="io">(i) → (ii) · WER, CER</span><b>ASR</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Automatic speech recognition: transcribing audio to text.</mark></li>
-            <li><span class="io">(i) → (iv) · CER</span><b>A2P</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Audio-to-phoneme conversion: transcribing audio to phonetic transcription.</mark></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="why" aria-labelledby="h-why">
-      <h2 id="h-why" class="ink">Why a phonetic tier</h2>
-      <div class="qaf">
-        <div class="glyph" lang="ar" dir="rtl" aria-hidden="true">ق</div>
-        <div class="measure">
-          <p><mark class="rv rv-edit" title="Paper (§2.3) has &quot;(§1)&quot; after &quot;underspecified&quot;; removed here.">Even fully diacritized orthography leaves dialectal pronunciation underspecified: for example, the realization of <span lang="ar" dir="rtl">ق</span> is not recoverable from the script.</mark> Automating this transcription could relieve the bottleneck, but for LA there has been no way to measure how well current systems perform the task.</p>
-          <p style="margin:0"><mark class="rv rv-edit" title="Paper (§1): &quot;across Palestinian varieties, ق (/q/) surfaces as a glottal stop [ʔ] in urban speech (ba&#x27;dir), as a voiceless velar [k] in rural speech (bakdir), and as a voiced velar [ɡ] in Bedouin speech (bagdir).&quot; Restructured into a list.">Across Palestinian varieties, <span lang="ar" dir="rtl">ق</span> (<span class="ph">/q/</span>) surfaces as:</mark></p>
-          <ul class="reflex">
-            <li><span class="who">Urban speech</span><span class="seg">[ʔ]</span><span class="w"><mark class="rv rv-edit" title="Paper (§1): &quot;across Palestinian varieties, ق (/q/) surfaces as a glottal stop [ʔ] in urban speech (ba&#x27;dir), as a voiceless velar [k] in rural speech (bakdir), and as a voiced velar [ɡ] in Bedouin speech (bagdir).&quot; Restructured into a list.">a glottal stop · <i>ba’dir</i></mark></span></li>
-            <li><span class="who">Rural speech</span><span class="seg">[k]</span><span class="w"><mark class="rv rv-edit" title="Paper (§1): &quot;across Palestinian varieties, ق (/q/) surfaces as a glottal stop [ʔ] in urban speech (ba&#x27;dir), as a voiceless velar [k] in rural speech (bakdir), and as a voiced velar [ɡ] in Bedouin speech (bagdir).&quot; Restructured into a list.">a voiceless velar · <i>bakdir</i></mark></span></li>
-            <li><span class="who">Bedouin speech</span><span class="seg">[ɡ]</span><span class="w"><mark class="rv rv-edit" title="Paper (§1): &quot;across Palestinian varieties, ق (/q/) surfaces as a glottal stop [ʔ] in urban speech (ba&#x27;dir), as a voiceless velar [k] in rural speech (bakdir), and as a voiced velar [ɡ] in Bedouin speech (bagdir).&quot; Restructured into a list.">a voiced velar · <i>bagdir</i></mark></span></li>
+            <li><b>Diacritization</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Restoring vowel and gemination marks.</mark></li>
+            <li><b>G2P</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Grapheme-to-phoneme conversion: mapping orthography to phonetic transcription.</mark></li>
+            <li><b>ASR</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Automatic speech recognition: transcribing audio to text.</mark></li>
+            <li><b>A2P</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Split into four items, capitalized.">Audio-to-phoneme conversion: transcribing audio to phonetic transcription.</mark></li>
           </ul>
         </div>
       </div>
@@ -514,114 +380,9 @@
             <tfoot><tr><th scope="row">Total</th><td class="src"></td><td>1,300</td><td>15,506</td><td>128.2</td></tr></tfoot>
           </table>
         </div>
-        <div class="dotted-v" aria-hidden="true"></div>
-        <div>
-          <h3 class="sub">Annotation reliability</h3>
-          <div class="iaa">
-            <div class="double"><span class="n">93.2%</span><span class="l"><mark class="rv rv-edit" title="Label. Paper (§2.4): &quot;giving 7,290 paired observations. Agreement is 93.2%&quot;.">agreement over 7,290 diacritic slots</mark></span></div>
-            <div class="double"><span class="n">κ = 0.898</span><span class="l"><mark class="rv rv-edit" title="Label. Paper (§2.4, Table 3): &quot;Cohen&#x27;s κ = 0.898&quot;, &quot;κ [95% CI] ... [0.886, 0.909]&quot;.">Cohen’s kappa, 95% CI [0.886, 0.909]</mark></span></div>
-          </div>
-          <p class="small">A second native speaker of Palestinian Arabic independently re-annotated a stratified subset of 150 utterances, 30 per variety, under the same audio-guided protocol. Agreement is high (κ ≥ 0.86) across all varieties.</p>
-          <p class="small">For 520 initial utterances, phonetic transcriptions were produced by hand and aligned to the Arabic orthography to place diacritics. <mark class="rv rv-edit" title="Paper (§2.3) has the citation &quot;(Mor-Lan, 2024)&quot; after &quot;Levanti&quot;; removed here.">For the remaining 780 utterances, Levanti produced an automatic first pass over both tiers, which annotators then corrected.</mark> Annotators worked against the audio throughout, and every utterance was reviewed by an author.</p>
-        </div>
       </div>
     </section>
   </div>
-
-  <section id="results" class="band" aria-labelledby="h-results">
-    <div class="wrap">
-      <h2 id="h-results" class="ink">Benchmarking results</h2>
-      <p class="lede"><mark class="rv rv-new" title="Not in the paper as a sentence. Table captions say &quot;on all 1300 utterances&quot; and mark the metrics &quot;↓&quot;.">Overall scores on all 1,300 utterances (%, lower is better).</mark> ASR, G2P and A2P report the neutral tier.</p>
-      <div class="panels">
-
-      <article class="panel" aria-labelledby="r-diac">
-        <header class="panel-head">
-          <span class="ticon" aria-hidden="true"><svg viewBox="0 0 40 40"><text x="20" y="31" text-anchor="middle" font-size="31" lang="ar" direction="rtl">ـمَّـ</text></svg></span>
-          <div><h3 id="r-diac">Diacritization</h3><p class="metric">DER (%)</p></div>
-        </header>
-        <ol class="bars" aria-label="Diacritization, DER (%), overall, lowest first">
-          <li class="bar excl"><span class="m">Levanti<sup class="ast">*</sup></span><span class="track"><span class="fill" style="--w:26.00%"></span><span class="v" style="--w:26.00%">7.8</span></span></li><li class="bar best"><span class="m">Gemini 3.5 Flash</span><span class="track"><span class="fill" style="--w:38.67%"></span><span class="v" style="--w:38.67%">11.6</span></span></li><li class="bar"><span class="m">GPT-5.5</span><span class="track"><span class="fill" style="--w:50.00%"></span><span class="v" style="--w:50.00%">15.0</span></span></li><li class="bar"><span class="m">Claude Opus 4.8</span><span class="track"><span class="fill" style="--w:60.67%"></span><span class="v" style="--w:60.67%">18.2</span></span></li><li class="bar"><span class="m">Catt</span><span class="track"><span class="fill" style="--w:81.33%"></span><span class="v" style="--w:81.33%">24.4</span></span></li><li class="bar"><span class="m">Shakkala</span><span class="track"><span class="fill" style="--w:85.33%"></span><span class="v" style="--w:85.33%">25.6</span></span></li><li class="bar"><span class="m">Mishkal</span><span class="track"><span class="fill" style="--w:91.33%"></span><span class="v" style="--w:91.33%">27.4</span></span></li>
-        </ol>
-        <div class="axis" aria-hidden="true"><span style="--x:0.00%">0</span><span style="--x:33.33%">10</span><span style="--x:66.67%">20</span><span style="--x:100.00%">30</span></div>
-        <p class="panel-note">Levanti reaches the lowest DER (7.8%), ahead of prompted Gemini 3.5 Flash (11.6%). MSA-oriented Catt, Shakkala and Mishkal trail between 24.4% and 27.4%.</p>
-      </article>
-      <article class="panel" aria-labelledby="r-g2p">
-        <header class="panel-head">
-          <span class="ticon" aria-hidden="true"><svg viewBox="0 0 40 40"><text x="20" y="25" text-anchor="middle" font-size="12.5" class="mono">mmi</text></svg></span>
-          <div><h3 id="r-g2p">G2P</h3><p class="metric">CER (%)</p></div>
-        </header>
-        <ol class="bars" aria-label="G2P, CER (%), overall, lowest first">
-          <li class="bar best"><span class="m">Gemini 3.5 Flash</span><span class="track"><span class="fill" style="--w:23.80%"></span><span class="v" style="--w:23.80%">11.9</span></span></li><li class="bar"><span class="m">Claude Opus 4.8</span><span class="track"><span class="fill" style="--w:24.00%"></span><span class="v" style="--w:24.00%">12.0</span></span></li><li class="bar"><span class="m">GPT-5.5</span><span class="track"><span class="fill" style="--w:24.40%"></span><span class="v" style="--w:24.40%">12.2</span></span></li><li class="bar excl"><span class="m">Levanti<sup class="ast">*</sup></span><span class="track"><span class="fill" style="--w:36.60%"></span><span class="v" style="--w:36.60%">18.3</span></span></li><li class="bar"><span class="m">CharsiuG2P</span><span class="track"><span class="fill" style="--w:69.60%"></span><span class="v" style="--w:69.60%">34.8</span></span></li><li class="bar"><span class="m">Jais v2 8B</span><span class="track"><span class="fill" style="--w:81.60%"></span><span class="v" style="--w:81.60%">40.8</span></span></li>
-        </ol>
-        <div class="axis" aria-hidden="true"><span style="--x:0.00%">0</span><span style="--x:20.00%">10</span><span style="--x:40.00%">20</span><span style="--x:60.00%">30</span><span style="--x:80.00%">40</span><span style="--x:100.00%">50</span></div>
-        <p class="panel-note">The three frontier LLMs achieve similar CER, 11.9–12.2%, clearly outperforming the dedicated systems: Levanti (18.3%) and CharsiuG2P (34.8%).</p>
-      </article>
-      <article class="panel" aria-labelledby="r-asr">
-        <header class="panel-head">
-          <span class="ticon" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="9.0" y="18.0" width="1.4" height="4" rx=".7"/><rect x="11.6" y="16.0" width="1.4" height="8" rx=".7"/><rect x="14.2" y="13.5" width="1.4" height="13" rx=".7"/><rect x="16.8" y="16.5" width="1.4" height="7" rx=".7"/><rect x="19.4" y="11.5" width="1.4" height="17" rx=".7"/><rect x="22.0" y="15.0" width="1.4" height="10" rx=".7"/><rect x="24.6" y="17.5" width="1.4" height="5" rx=".7"/><rect x="27.2" y="14.0" width="1.4" height="12" rx=".7"/><rect x="29.8" y="17.0" width="1.4" height="6" rx=".7"/><rect x="32.4" y="18.5" width="1.4" height="3" rx=".7"/></svg></span>
-          <div><h3 id="r-asr">ASR</h3><p class="metric">WER (%)</p></div>
-        </header>
-        <ol class="bars" aria-label="ASR, WER (%), overall, lowest first">
-          <li class="bar best"><span class="m">Gemini 3.5 Flash</span><span class="track"><span class="fill" style="--w:34.50%"></span><span class="v" style="--w:34.50%">27.6</span></span></li><li class="bar"><span class="m">GPT-Audio</span><span class="track"><span class="fill" style="--w:43.62%"></span><span class="v" style="--w:43.62%">34.9</span></span></li><li class="bar"><span class="m">Cohere Transcribe</span><span class="track"><span class="fill" style="--w:44.38%"></span><span class="v" style="--w:44.38%">35.5</span></span></li><li class="bar"><span class="m">Seamless-EGY</span><span class="track"><span class="fill" style="--w:45.38%"></span><span class="v" style="--w:45.38%">36.3</span></span></li><li class="bar"><span class="m">BYZÖ-Whisper</span><span class="track"><span class="fill" style="--w:47.25%"></span><span class="v" style="--w:47.25%">37.8</span></span></li><li class="bar"><span class="m">Whisper-Levantine</span><span class="track"><span class="fill" style="--w:48.62%"></span><span class="v" style="--w:48.62%">38.9</span></span></li><li class="bar"><span class="m">Whisper large v3</span><span class="track"><span class="fill" style="--w:49.12%"></span><span class="v" style="--w:49.12%">39.3</span></span></li><li class="bar"><span class="m">Seamless-MSA</span><span class="track"><span class="fill" style="--w:50.50%"></span><span class="v" style="--w:50.50%">40.4</span></span></li><li class="bar"><span class="m">MMS-1b</span><span class="track"><span class="fill" style="--w:90.62%"></span><span class="v" style="--w:90.62%">72.5</span></span></li>
-        </ol>
-        <div class="axis" aria-hidden="true"><span style="--x:0.00%">0</span><span style="--x:25.00%">20</span><span style="--x:50.00%">40</span><span style="--x:75.00%">60</span><span style="--x:100.00%">80</span></div>
-        <p class="panel-note">The two prompted audio LLMs and the dialect-targeted systems lead, with Gemini 3.5 Flash strongest overall by a clear margin (27.6 WER, 9.6 CER).</p>
-      </article>
-      <article class="panel" aria-labelledby="r-a2p">
-        <header class="panel-head">
-          <span class="ticon" aria-hidden="true"><svg viewBox="0 0 40 40"><g transform="translate(-3 -6) scale(.8)"><rect x="9.0" y="18.0" width="1.4" height="4" rx=".7"/><rect x="11.6" y="16.0" width="1.4" height="8" rx=".7"/><rect x="14.2" y="13.5" width="1.4" height="13" rx=".7"/><rect x="16.8" y="16.5" width="1.4" height="7" rx=".7"/><rect x="19.4" y="11.5" width="1.4" height="17" rx=".7"/><rect x="22.0" y="15.0" width="1.4" height="10" rx=".7"/><rect x="24.6" y="17.5" width="1.4" height="5" rx=".7"/><rect x="27.2" y="14.0" width="1.4" height="12" rx=".7"/><rect x="29.8" y="17.0" width="1.4" height="6" rx=".7"/><rect x="32.4" y="18.5" width="1.4" height="3" rx=".7"/></g><text x="20" y="33" text-anchor="middle" font-size="9" class="mono">mmi</text></svg></span>
-          <div><h3 id="r-a2p">A2P</h3><p class="metric">CER (%)</p></div>
-        </header>
-        <ol class="bars" aria-label="A2P, CER (%), overall, lowest first">
-          <li class="bar best"><span class="m">Gemini 3.5 Flash</span><span class="track"><span class="fill" style="--w:68.33%"></span><span class="v" style="--w:68.33%">20.5</span></span></li><li class="bar"><span class="m">GPT-Audio</span><span class="track"><span class="fill" style="--w:83.00%"></span><span class="v" style="--w:83.00%">24.9</span></span></li>
-        </ol>
-        <div class="axis" aria-hidden="true"><span style="--x:0.00%">0</span><span style="--x:33.33%">10</span><span style="--x:66.67%">20</span><span style="--x:100.00%">30</span></div>
-        <p class="panel-note">Gemini 3.5 Flash attains the lowest error (20.5%), with GPT-Audio behind at 24.9%. <mark class="rv rv-edit" title="Paper (§4.4): &quot;Direct phonetic transcription therefore offers no advantage...&quot;; &quot;therefore&quot; removed.">Direct phonetic transcription offers no advantage over transcribing and then converting.</mark></p><div class="mini"><h4><mark class="rv rv-new" title="Chart title, not in the paper. Paper (§4.4) compares &quot;direct A2P against an ASR → G2P cascade&quot;.">ASR → G2P cascade, CER (%)</mark></h4><ol class="bars" aria-label="ASR → G2P cascade, CER (%)"><li class="bar"><span class="m">Gold → G2P oracle</span><span class="track"><span class="fill" style="--w:43.33%"></span><span class="v" style="--w:43.33%">13.0</span></span></li><li class="bar"><span class="m">Gemini cascade</span><span class="track"><span class="fill" style="--w:63.00%"></span><span class="v" style="--w:63.00%">18.9</span></span></li><li class="bar"><span class="m">GPT-Audio cascade</span><span class="track"><span class="fill" style="--w:77.67%"></span><span class="v" style="--w:77.67%">23.3</span></span></li></ol><div class="axis" aria-hidden="true"><span style="--x:0.00%">0</span><span style="--x:33.33%">10</span><span style="--x:66.67%">20</span><span style="--x:100.00%">30</span></div><p class="panel-note">The cascade reaches 18.9% CER for Gemini and 23.3% for GPT-Audio, against 20.5% and 24.9% for direct A2P, while a gold-transcript → G2P oracle reaches 13.0%.</p></div>
-      </article>
-      </div>
-      <div class="keys">
-        <span><i class="sw" style="background:var(--sun)"></i><mark class="rv rv-new" title="Legend label, not in the paper.">best overall, bold in the paper’s table</mark></span>
-        <span><i class="sw" style="background:var(--violet-bar)"></i><mark class="rv rv-new" title="Legend label, not in the paper.">other systems</mark></span>
-        <span><i class="sw" style="background:repeating-linear-gradient(135deg, var(--lilac) 0 4px, #C9BCDD 4px 7px)"></i><span>Levanti<sup class="ast">*</sup><mark class="rv rv-new" title="Legend label. Paper: &quot;Bold = best per row, excluding Levanti (see asterisk).&quot;">, excluded from bold</mark></span></span>
-        <p><sup class="ast">*</sup> Diacritization: Levanti produced silver diacritization labels used to annotate a portion of the dataset, so its score on those is not an independent measurement. G2P: Levanti produced the expansion utterances’ first-pass transcription.</p>
-      </div>
-      <details class="full">
-        <summary>Per-variety results</summary>
-        <div class="tables">
-
-        <div class="tscroll" tabindex="0" role="region" aria-label="Table 4 · Diacritization, DER (%)">
-          <table class="res">
-            <caption>Table 4 · Diacritization, DER (%)</caption>
-            <thead><tr><td></td><th scope="col">Gemini 3.5 Flash</th><th scope="col">Claude Opus 4.8</th><th scope="col">GPT-5.5</th><th scope="col">Shakkala</th><th scope="col">Mishkal</th><th scope="col">Catt</th><th scope="col">Levanti<sup class="ast">*</sup></th></tr></thead>
-            <tbody><tr class="ov"><th scope="row">Overall</th><td><b>11.6</b></td><td>18.2</td><td>15.0</td><td>25.6</td><td>27.4</td><td>24.4</td><td>7.8</td></tr><tr><th scope="row">Pal./Urban</th><td><b>11.3</b></td><td>18.4</td><td>14.6</td><td>24.9</td><td>26.4</td><td>23.9</td><td>7.4</td></tr><tr><th scope="row">Pal./Rural</th><td><b>10.9</b></td><td>17.3</td><td>14.4</td><td>26.0</td><td>28.1</td><td>24.8</td><td>6.5</td></tr><tr><th scope="row">Jordanian</th><td><b>11.3</b></td><td>17.8</td><td>14.8</td><td>25.1</td><td>26.8</td><td>24.0</td><td>7.1</td></tr><tr><th scope="row">Lebanese</th><td><b>12.2</b></td><td>18.4</td><td>15.7</td><td>26.9</td><td>28.6</td><td>25.4</td><td>8.8</td></tr><tr><th scope="row">Syrian</th><td><b>12.1</b></td><td>18.8</td><td>15.6</td><td>25.1</td><td>27.2</td><td>24.2</td><td>9.3</td></tr></tbody>
-          </table>
-        </div>
-        <div class="tscroll" tabindex="0" role="region" aria-label="Table 6 · G2P, CER (%)">
-          <table class="res">
-            <caption>Table 6 · G2P, CER (%)</caption>
-            <thead><tr><td></td><th scope="col">Gemini 3.5 Flash</th><th scope="col">Claude Opus 4.8</th><th scope="col">GPT-5.5</th><th scope="col">Jais v2 8B</th><th scope="col">Levanti<sup class="ast">*</sup></th><th scope="col">CharsiuG2P</th></tr></thead>
-            <tbody><tr class="ov"><th scope="row">Overall</th><td><b>11.9</b></td><td>12.0</td><td>12.2</td><td>40.8</td><td>18.3</td><td>34.8</td></tr><tr><th scope="row">Pal./Urban</th><td>12.1</td><td><b>11.0</b></td><td>12.2</td><td>41.8</td><td>16.2</td><td>32.3</td></tr><tr><th scope="row">Pal./Rural</th><td><b>11.8</b></td><td>11.9</td><td>12.6</td><td>43.0</td><td>17.6</td><td>36.1</td></tr><tr><th scope="row">Jordanian</th><td>11.6</td><td><b>11.3</b></td><td>11.9</td><td>36.6</td><td>17.2</td><td>34.0</td></tr><tr><th scope="row">Lebanese</th><td><b>13.0</b></td><td>13.6</td><td>13.1</td><td>39.1</td><td>20.4</td><td>36.5</td></tr><tr><th scope="row">Syrian</th><td><b>11.2</b></td><td>12.3</td><td>11.3</td><td>43.8</td><td>20.2</td><td>35.4</td></tr></tbody>
-          </table>
-        </div>
-        <div class="tscroll wide" tabindex="0" role="region" aria-label="Table 8 · ASR, WER and CER (%)">
-          <table class="res">
-            <caption>Table 8 · ASR, WER and CER (%)</caption>
-            <thead><tr><td></td><th scope="col">Seamless-MSA</th><th scope="col">Seamless-EGY</th><th scope="col">Whisper large v3</th><th scope="col">Whisper-Levantine</th><th scope="col">MMS-1b</th><th scope="col">BYZÖ-Whisper</th><th scope="col">Cohere Transcribe</th><th scope="col">Gemini 3.5 Flash</th><th scope="col">GPT-Audio</th></tr></thead>
-            <tbody><tr class="blk"><th scope="rowgroup" colspan="10">WER (%)</th></tr><tr class="ov"><th scope="row">Overall</th><td>40.4</td><td>36.3</td><td>39.3</td><td>38.9</td><td>72.5</td><td>37.8</td><td>35.5</td><td><b>27.6</b></td><td>34.9</td></tr><tr><th scope="row">Pal./Urban</th><td>31.9</td><td>29.1</td><td>29.5</td><td>35.3</td><td>67.5</td><td>39.2</td><td>35.8</td><td><b>26.5</b></td><td>35.9</td></tr><tr><th scope="row">Pal./Rural</th><td>47.6</td><td>42.9</td><td>45.4</td><td>34.9</td><td>77.9</td><td><b>20.3</b></td><td>33.2</td><td>32.0</td><td>41.2</td></tr><tr><th scope="row">Jordanian</th><td>34.7</td><td>31.8</td><td>39.5</td><td>30.3</td><td>68.2</td><td>34.4</td><td>27.1</td><td><b>21.0</b></td><td>28.7</td></tr><tr><th scope="row">Lebanese</th><td>44.3</td><td>38.8</td><td>45.7</td><td>44.7</td><td>76.3</td><td>50.2</td><td>42.5</td><td><b>27.2</b></td><td>34.0</td></tr><tr><th scope="row">Syrian</th><td>43.9</td><td>39.3</td><td>36.9</td><td>50.4</td><td>72.9</td><td>45.8</td><td>39.6</td><td><b>31.5</b></td><td>34.5</td></tr><tr class="blk"><th scope="rowgroup" colspan="10">CER (%)</th></tr><tr class="ov"><th scope="row">Overall</th><td>17.8</td><td>14.1</td><td>20.6</td><td>13.7</td><td>27.0</td><td>11.9</td><td>16.8</td><td><b>9.6</b></td><td>14.4</td></tr><tr><th scope="row">Pal./Urban</th><td>13.3</td><td>10.8</td><td>10.9</td><td>11.4</td><td>23.8</td><td>11.4</td><td>19.2</td><td><b>9.7</b></td><td>16.2</td></tr><tr><th scope="row">Pal./Rural</th><td>19.1</td><td>16.3</td><td>32.0</td><td>10.5</td><td>29.3</td><td><b>5.9</b></td><td>11.7</td><td>10.3</td><td>16.6</td></tr><tr><th scope="row">Jordanian</th><td>16.6</td><td>12.8</td><td>18.2</td><td>10.1</td><td>26.1</td><td>10.3</td><td>12.0</td><td><b>7.1</b></td><td>11.2</td></tr><tr><th scope="row">Lebanese</th><td>19.3</td><td>14.9</td><td>24.0</td><td>17.5</td><td>29.0</td><td>16.3</td><td>22.8</td><td><b>10.1</b></td><td>14.7</td></tr><tr><th scope="row">Syrian</th><td>21.0</td><td>16.2</td><td>18.9</td><td>18.9</td><td>27.2</td><td>15.5</td><td>18.2</td><td><b>10.9</b></td><td>13.2</td></tr></tbody>
-          </table>
-        </div>
-        <div class="tscroll" tabindex="0" role="region" aria-label="Table 10 · A2P, CER (%)">
-          <table class="res">
-            <caption>Table 10 · A2P, CER (%)</caption>
-            <thead><tr><td></td><th scope="col">Gemini 3.5 Flash</th><th scope="col">GPT-Audio</th></tr></thead>
-            <tbody><tr class="ov"><th scope="row">Overall</th><td><b>20.5</b></td><td>24.9</td></tr><tr><th scope="row">Pal./Urban</th><td><b>21.1</b></td><td>27.2</td></tr><tr><th scope="row">Pal./Rural</th><td><b>21.0</b></td><td>28.6</td></tr><tr><th scope="row">Jordanian</th><td><b>18.0</b></td><td>23.4</td></tr><tr><th scope="row">Lebanese</th><td><b>20.8</b></td><td>23.2</td></tr><tr><th scope="row">Syrian</th><td><b>22.4</b></td><td>23.4</td></tr></tbody>
-          </table>
-        </div>
-        </div>
-        <p class="cap"><mark class="rv rv-edit" title="Paper (Tables 4, 6): &quot;Bold = best per row, excluding Levanti (see asterisk).&quot;; Tables 8, 10: &quot;Bold = best per row.&quot;">Bold = best per row (Tables 4 and 6: excluding Levanti).</mark> <mark class="rv rv-new" title="Not in the paper. Paper (§3): &quot;the small grey figure beside each score gives the difference to the strict tier&quot;.">The paper also gives the difference from the strict tier beside each neutral score; see Tables 6, 8 and 10.</mark></p>
-      </details>
-    </div>
-  </section>
 
   <div class="wrap">
     <div class="three">
@@ -654,6 +415,7 @@
   <div class="wrap">
     <a class="fbrand" href="#top" aria-label="SHAMS, back to top"><svg viewBox="0 0 1160 540" aria-hidden="true"><use href="#mark"/></svg><span>SHAMS</span></a>
     <ul class="flinks">
+      <li><a href="https://arxiv.org/abs/2610.01427"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.5 0.5H12L17.5 6V18.5A1 1 0 0 1 16.5 19.5H4.5A1 1 0 0 1 3.5 18.5V1.5A1 1 0 0 1 4.5 0.5Z"/><path fill="none" stroke="var(--icon-bg)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M12 1V5A1 1 0 0 0 13 6H17"/><path fill="none" stroke="var(--icon-bg)" stroke-width="1.5" stroke-linecap="round" d="M6.5 10H14.5M6.5 13H14.5M6.5 16H11"/></svg>Paper</a></li>
       <li><a href="https://github.com/bensapirstein/shams"><svg viewBox="84 7399 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"/></svg>Code</a></li>
       <li><a href="https://huggingface.co/datasets/shams-nlp/shams"><svg viewBox="0 0 500 463" aria-hidden="true" focusable="false"> <path d="M496.592 369.699C500.563 381.093 499.61 393.227 494.315 403.778C490.503 411.48 485.05 417.441 478.379 422.769C470.331 429.099 460.324 434.48 448.253 439.65C433.852 445.77 416.274 451.52 408.226 453.63C387.63 458.958 367.829 462.334 347.762 462.493C319.066 462.756 294.34 456.004 276.762 438.753C267.656 439.861 258.443 440.494 249.178 440.494C240.389 440.494 231.706 439.967 223.076 438.912C205.445 456.057 180.825 462.756 152.234 462.493C132.168 462.334 112.366 458.958 91.7177 453.63C83.7229 451.52 66.145 445.77 51.7439 439.65C39.6723 434.48 29.6656 429.099 21.6708 422.769C14.9467 417.441 9.49334 411.48 5.68127 403.778C0.439661 393.227 -0.566304 381.093 3.45755 369.699C-0.248631 360.994 -1.20165 351.024 1.71035 339.998C3.03399 334.987 5.20476 330.344 7.95792 326.229C7.37552 324.067 6.89901 321.851 6.58134 319.424C4.56941 304.97 9.59923 291.781 19.0765 281.547C23.7357 276.43 28.7655 272.895 34.0071 270.627C30.1421 254.273 28.1302 237.445 28.1302 220.247C28.1302 98.5969 127.085 0 249.178 0C291.111 0 330.343 11.6058 363.805 31.8633C369.84 35.5561 375.77 39.5126 381.436 43.7329C384.242 45.8431 387.048 48.006 389.748 50.2744C392.501 52.49 395.201 54.8112 397.796 57.1851C405.632 64.3069 412.991 71.9562 419.715 80.133C421.992 82.8235 424.163 85.6194 426.28 88.4681C430.569 94.1128 434.54 99.9685 438.193 106.035C443.752 115.109 448.623 124.604 452.859 134.469C455.665 141.064 458.101 147.816 460.271 154.727C463.501 165.067 465.99 175.723 467.684 186.696C468.213 190.336 468.69 194.028 469.06 197.721C469.802 205.107 470.225 212.598 470.225 220.247C470.225 237.234 468.213 253.904 464.454 269.994C470.278 272.262 475.784 275.955 480.92 281.547C490.397 291.781 495.427 305.022 493.415 319.477C493.098 321.851 492.621 324.067 492.039 326.229C494.792 330.344 496.963 334.987 498.286 339.998C501.198 351.024 500.245 360.994 496.592 369.699Z" style="fill:var(--icon-bg)"/> <path d="M433.839 221.75C433.839 120.838 351.531 39.0323 250 39.0323C148.469 39.0323 66.1613 120.838 66.1613 221.75C66.1613 322.662 148.469 404.468 250 404.468C351.531 404.468 433.839 322.662 433.839 221.75ZM45 221.75C45 109.222 136.782 18 250 18C363.218 18 455 109.222 455 221.75C455 334.278 363.218 425.5 250 425.5C136.782 425.5 45 334.278 45 221.75Z" fill="currentColor"/> <path d="M250 405.5C352.173 405.5 435 323.232 435 221.75C435 120.268 352.173 38 250 38C147.827 38 65 120.268 65 221.75C65 323.232 147.827 405.5 250 405.5Z" style="fill:var(--icon-bg)"/> <path d="M202.198 404.174C216.789 383.118 215.755 367.316 195.735 347.627C175.715 327.943 164.062 299.145 164.062 299.145C164.062 299.145 159.709 282.419 149.794 283.958C139.88 285.497 132.6 310.492 153.368 325.783C174.135 341.069 149.232 351.456 141.242 337.099C133.252 322.741 111.435 285.831 100.121 278.772C88.8117 271.713 80.8483 275.668 83.5151 290.218C86.182 304.769 133.48 340.036 128.878 347.668C124.276 355.296 108.058 338.7 108.058 338.7C108.058 338.7 57.3079 293.255 46.2587 305.097C35.2096 316.94 54.641 326.863 82.3328 343.359C110.03 359.85 112.177 364.206 108.248 370.446C104.314 376.685 43.1836 325.971 37.4417 347.47C31.705 368.969 99.8291 375.209 95.6247 390.051C91.4203 404.899 47.6372 361.958 38.6823 378.689C29.7221 395.425 100.465 415.088 101.038 415.234C123.889 421.067 181.924 433.426 202.198 404.174Z" style="fill:var(--icon-bg)"/> <path d="M90.9935 255C82.4744 255 74.8603 258.477 69.551 264.784C66.2675 268.69 62.8367 274.986 62.5578 284.414C58.985 283.394 55.5489 282.824 52.3391 282.824C44.183 282.824 36.8163 285.93 31.6069 291.573C24.9137 298.815 21.9407 307.715 23.2351 316.62C23.8508 320.861 25.2768 324.663 27.4079 328.182C22.9142 331.795 19.6044 336.826 18.0047 342.876C16.7524 347.619 15.4685 357.497 22.1722 367.673C21.746 368.337 21.3461 369.027 20.9725 369.733C16.9418 377.336 16.684 385.927 20.2411 393.928C25.6346 406.054 39.0368 415.608 65.0625 425.863C81.2536 432.242 96.0661 436.321 96.1976 436.357C117.603 441.874 136.962 444.677 153.721 444.677C184.525 444.677 206.578 435.301 219.27 416.811C239.697 387.036 236.776 359.803 210.346 333.552C195.717 319.026 185.993 297.607 183.967 292.906C179.884 278.986 169.086 263.513 151.138 263.513H151.133C149.622 263.513 148.096 263.633 146.592 263.869C138.73 265.097 131.858 269.595 126.949 276.361C121.65 269.814 116.504 264.606 111.847 261.667C104.827 257.243 97.813 255 90.9935 255ZM90.9935 275.917C93.6771 275.917 96.9553 277.051 100.57 279.331C111.794 286.406 133.452 323.403 141.382 337.793C144.039 342.614 148.581 344.654 152.669 344.654C160.783 344.654 167.118 336.638 153.411 326.451C132.8 311.124 140.03 286.072 149.87 284.529C150.301 284.461 150.727 284.43 151.138 284.43C160.083 284.43 164.03 299.751 164.03 299.751C164.03 299.751 175.595 328.616 195.465 348.346C215.334 368.08 216.36 383.919 201.879 405.024C192.002 419.415 173.096 421.292 153.721 421.292C133.626 421.292 112.99 417.772 101.445 414.796C100.877 414.65 30.7019 396.255 39.5946 379.48C41.089 376.661 43.5516 375.532 46.6509 375.532C59.1744 375.532 81.9535 394.054 91.746 394.054C93.935 394.054 95.5662 392.371 96.1976 390.112C100.555 374.522 32.6646 369.738 38.3633 348.189C39.3683 344.377 42.094 342.829 45.9248 342.834C62.4737 342.834 99.6021 371.756 107.385 371.756C107.979 371.756 108.405 371.584 108.637 371.218C112.536 364.964 110.74 359.872 83.257 343.343C55.7738 326.808 36.1428 317.588 47.114 305.718C48.3768 304.347 50.1659 303.741 52.3391 303.741C69.0248 303.746 108.447 339.398 108.447 339.398C108.447 339.398 119.087 350.395 125.523 350.395C127.001 350.395 128.259 349.815 129.111 348.382C133.673 340.737 86.7366 305.388 84.0898 290.804C82.2955 280.921 85.3474 275.917 90.9935 275.917Z" fill="currentColor"/> <path d="M296.9 404.174C282.31 383.118 283.343 367.316 303.363 347.627C323.383 327.943 335.037 299.145 335.037 299.145C335.037 299.145 339.39 282.419 349.304 283.958C359.219 285.497 366.498 310.492 345.731 325.783C324.963 341.069 349.866 351.456 357.856 337.099C365.846 322.741 387.663 285.831 398.978 278.772C410.287 271.713 418.25 275.668 415.583 290.218C412.916 304.769 365.618 340.036 370.22 347.668C374.822 355.296 391.041 338.7 391.041 338.7C391.041 338.7 441.791 293.255 452.84 305.097C463.889 316.94 444.457 326.863 416.766 343.359C389.068 359.85 386.921 364.206 390.85 370.446C394.784 376.685 455.915 325.971 461.657 347.47C467.393 368.969 399.269 375.209 403.474 390.051C407.678 404.899 451.461 361.958 460.416 378.689C469.376 395.425 398.633 415.088 398.06 415.234C375.209 421.067 317.175 433.426 296.9 404.174Z" style="fill:var(--icon-bg)"/> <path d="M408.105 255C416.624 255 424.238 258.477 429.547 264.784C432.831 268.69 436.262 274.986 436.541 284.414C440.113 283.394 443.549 282.824 446.759 282.824C454.915 282.824 462.282 285.93 467.491 291.573C474.185 298.815 477.158 307.715 475.863 316.62C475.248 320.861 473.822 324.663 471.69 328.182C476.184 331.795 479.494 336.826 481.094 342.876C482.346 347.619 483.63 357.497 476.926 367.673C477.352 368.337 477.752 369.027 478.126 369.733C482.157 377.336 482.414 385.927 478.857 393.928C473.464 406.054 460.062 415.608 434.036 425.863C417.845 432.242 403.032 436.321 402.901 436.357C381.495 441.874 362.136 444.677 345.377 444.677C314.573 444.677 292.52 435.301 279.829 416.811C259.402 387.036 262.322 359.803 288.753 333.552C303.381 319.026 313.105 297.607 315.131 292.906C319.214 278.986 330.012 263.513 347.961 263.513H347.966C349.476 263.513 351.002 263.633 352.507 263.869C360.368 265.097 367.24 269.595 372.15 276.361C377.449 269.814 382.595 264.606 387.252 261.667C394.271 257.243 401.285 255 408.105 255ZM408.105 275.917C405.421 275.917 402.143 277.051 398.528 279.331C387.304 286.406 365.646 323.403 357.716 337.793C355.059 342.614 350.518 344.654 346.429 344.654C338.315 344.654 331.98 336.638 345.687 326.451C366.299 311.124 359.069 286.072 349.229 284.529C348.797 284.461 348.371 284.43 347.961 284.43C339.015 284.43 335.069 299.751 335.069 299.751C335.069 299.751 323.503 328.616 303.634 348.346C283.764 368.08 282.738 383.919 297.219 405.024C307.096 419.415 326.002 421.292 345.377 421.292C365.472 421.292 386.108 417.772 397.653 414.796C398.221 414.65 468.397 396.255 459.504 379.48C458.009 376.661 455.547 375.532 452.447 375.532C439.924 375.532 417.145 394.054 407.352 394.054C405.163 394.054 403.532 392.371 402.901 390.112C398.543 374.522 466.434 369.738 460.735 348.189C459.73 344.377 457.004 342.829 453.174 342.834C436.625 342.834 399.496 371.756 391.714 371.756C391.119 371.756 390.693 371.584 390.461 371.218C386.562 364.964 388.358 359.872 415.841 343.343C443.325 326.808 462.956 317.588 451.984 305.718C450.722 304.347 448.932 303.741 446.759 303.741C430.074 303.746 390.651 339.398 390.651 339.398C390.651 339.398 380.011 350.395 373.576 350.395C372.097 350.395 370.84 349.815 369.987 348.382C365.425 340.737 412.362 305.388 415.009 290.804C416.803 280.921 413.751 275.917 408.105 275.917Z" fill="currentColor"/> <path d="M319.277 228.901C319.277 205.236 288.585 241.304 250.637 241.465C212.692 241.306 182 205.238 182 228.901C182 244.591 189.507 270.109 209.669 285.591C213.681 271.787 235.726 260.729 238.877 262.317C243.364 264.578 243.112 270.844 250.637 276.365C258.163 270.844 257.911 264.58 262.398 262.317C265.551 260.729 287.594 271.787 291.605 285.591C311.767 270.109 319.275 244.591 319.275 228.903L319.277 228.901Z" fill="currentColor"/> <path d="M262.4 262.315C257.913 264.576 258.165 270.842 250.639 276.363C243.114 270.842 243.366 264.578 238.879 262.315C235.726 260.727 213.683 271.785 209.672 285.589C219.866 293.417 233.297 298.678 250.627 298.806C250.631 298.806 250.635 298.806 250.641 298.806C250.646 298.806 250.65 298.806 250.656 298.806C267.986 298.68 281.417 293.417 291.611 285.589C287.6 271.785 265.555 260.727 262.404 262.315H262.4Z" fill="#E56B6F"/> <path d="M373 196C382.389 196 390 188.389 390 179C390 169.611 382.389 162 373 162C363.611 162 356 169.611 356 179C356 188.389 363.611 196 373 196Z" fill="currentColor"/> <path d="M128 196C137.389 196 145 188.389 145 179C145 169.611 137.389 162 128 162C118.611 162 111 169.611 111 179C111 188.389 118.611 196 128 196Z" fill="currentColor"/> <path d="M313.06 171.596C319.796 173.968 322.476 187.779 329.281 184.171C342.167 177.337 347.06 161.377 340.208 148.524C333.356 135.671 317.354 130.792 304.467 137.626C291.58 144.46 286.688 160.419 293.54 173.272C296.774 179.339 307.039 169.475 313.06 171.596Z" fill="currentColor"/> <path d="M188.554 171.596C181.818 173.968 179.138 187.779 172.334 184.171C159.447 177.337 154.555 161.377 161.407 148.524C168.259 135.671 184.26 130.792 197.147 137.626C210.034 144.46 214.926 160.419 208.074 173.272C204.84 179.339 194.575 169.475 188.554 171.596Z" fill="currentColor"/> </svg>Data</a></li>
     </ul>
