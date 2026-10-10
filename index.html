@@ -13,8 +13,6 @@
 <link rel="preload" href="fonts/inter-tight-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css">
-<script>/* OPTION SPREAD (mobile title): remove after the choice */
-(function(){var v=new URLSearchParams(location.search).get('title');document.documentElement.setAttribute('data-title',/^[abc]$/.test(v||'')?v:'c');})();</script>
 <style>
   /* Palette sampled from the poster draft (Artboard 1@2x.png); names follow Ben's style sheet. */
   :root {
@@ -185,6 +183,7 @@
   h3.sub { margin-bottom: 10px; font-size: 14px; }
   .tasks { gap: 10px 14px; }
   .tasks li { padding-top: 6px; font-size: 15.5px; line-height: 1.35; }
+  .acro { margin: 12px 0 0; font-size: 14px; line-height: 1.45; color: var(--muted); }
 
   /* ---------- responsive ---------- */
   @media (max-width: 1100px) {
@@ -206,13 +205,10 @@
     .brand .word { font-size: 60px; }
     .brand .exp { font-size: 13px; }
     h1.title { text-align: center; margin: 0 auto; max-width: none; }
-    /* OPTION SPREAD (mobile title): remove after the choice */
-    html[data-title="a"] h1.title { font-size: 27px; }
-    html[data-title="b"] h1.title { font-size: 35px; }
-    html[data-title="c"] h1.title > span:not(.sr) { white-space: nowrap; }
-    html[data-title="c"] h1.title > span:nth-child(2) { font-size: calc((100vw - 64px) * .1078); }
-    html[data-title="c"] h1.title > span:nth-child(3) { font-size: calc((100vw - 64px) * .0836); }
-    html[data-title="c"] h1.title > span:nth-child(4) { font-size: calc((100vw - 64px) * .1073); }
+    h1.title > span:not(.sr) { white-space: nowrap; }
+    h1.title > span:nth-child(2) { font-size: calc((100vw - 64px) * .1078); }
+    h1.title > span:nth-child(3) { font-size: calc((100vw - 64px) * .0836); }
+    h1.title > span:nth-child(4) { font-size: calc((100vw - 64px) * .1073); }
     .brand .exp { white-space: nowrap; }
     .authors { grid-template-columns: repeat(2, minmax(0, 1fr)); font-size: 16.5px; gap: 16px 14px; text-align: center; }
     .pill { padding: 10px 20px 10px 14px; }
@@ -244,21 +240,9 @@
     .pill, .pill:hover { transition: none; transform: none; }
   }
 
-  /* Review marks: remove the review class from the body tag (or this block) before publishing */
-  mark.rv { background: none; color: inherit; }
-  body.review mark.rv { padding: 0 .1em; border-radius: 2px; cursor: help; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-  body.review mark.rv-edit { background: rgba(242,163,61,.30); box-shadow: inset 0 -2px 0 #E0912F; }
-  body.review mark.rv-new { background: rgba(232,66,38,.18); box-shadow: inset 0 -2px 0 #E84226; }
-  .rv-key, .rv-list { display: none; }
-  body.review .rv-key { display: flex; position: sticky; top: 0; z-index: 50; gap: 14px; flex-wrap: wrap; align-items: center; padding: 8px 16px; background: #211C3D; color: #FBF8F0; font: 500 13px/1.4 var(--body, sans-serif); }
-  body.review .rv-key mark { padding: 0 .3em; color: #FBF8F0; }
-  body.review .rv-key a { color: #FBF8F0; }
-  body.review .rv-list { display: block; max-width: 1100px; margin: 48px auto; padding: 0 16px; font-size: 15px; }
-  .rv-list ol { padding-left: 1.4em; } .rv-list li { margin: 0 0 12px; } .rv-list .q { font-weight: 600; } .rv-list .note { display: block; opacity: .8; }
 </style>
 </head>
-<body class="review">
-<div class="rv-key" role="note">Review draft: <mark class="rv rv-edit">edited from a paper sentence</mark> <mark class="rv rv-new">not in the paper</mark> Unmarked prose is verbatim from the paper. Hover a mark for the source, or see <a href="#rv-list">the full list</a>.</div>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="mark" viewBox="320 405 1160 540">
 <path fill="currentColor" d="M586.06,828.74l31.93-25.45c-67.21-47.42-108.88-115.46-123.53-193.19h-52.47c13,84.32,68.48,176.33,144.07,218.64Z"/>
@@ -316,20 +300,20 @@
           <li class="stat"><span class="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M8 17v6M13 13v14M18 8v24M23 12v16M28 15v10M33 18v4"/></svg></span>
             <span><span class="n">1,300</span><span class="l">utterances</span></span></li>
           <li class="stat"><span class="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M7 16h6l8-6v20l-8-6H7z"/><path d="M26 15a7 7 0 0 1 0 10M30 11a12.5 12.5 0 0 1 0 18"/></svg></span>
-            <span><span class="n">2+<small>hours</small></span><span class="l"><mark class="rv rv-new" title="Label, not in the paper. Paper (§2.1): &quot;just over two hours of speech&quot;.">of speech</mark></span></span></li>
+            <span><span class="n">2+<small>hours</small></span><span class="l">of speech</span></span></li>
           <li class="stat"><span class="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="9" y="8" width="22" height="24" rx="5"/><path d="M14 15h12M14 20h12M14 25h7"/></svg></span>
             <span><span class="n">15,506</span><span class="l">words</span></span></li>
           <li class="stat"><span class="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="14" cy="23" r="6"/><path d="M14 17V6M10 10l4-4 4 4"/><circle cx="27" cy="17" r="6"/><path d="M27 23v11M23 30h8"/></svg></span>
-            <span><span class="n">52.8/47.2</span><span class="l"><mark class="rv rv-edit" title="Label from Table 1 caption: &quot;the male/female share of words in per cent&quot;.">male/female share of words (%)</mark></span></span></li>
+            <span><span class="n">52.8/47.2</span><span class="l">male/female share of words (%)</span></span></li>
           <li class="stat"><span class="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 6l11 4v8c0 7.5-4.7 13-11 16-6.3-3-11-8.5-11-16v-8z"/><path d="M15 20l4 4 7-8"/></svg></span>
-            <span><span class="n">93.2%</span><span class="l"><mark class="rv rv-new" title="Label, not in the paper. Paper (§2.4): &quot;Agreement is 93.2%&quot; over &quot;a stratified subset of 150 utterances&quot;.">diacritic agreement, 150-utterance subset</mark></span></span></li>
+            <span><span class="n">93.2%</span><span class="l">diacritic agreement, 150-utterance subset</span></span></li>
         </ul>
       </section>
     </div>
 
     <div class="tldr double">
       <span class="k">TL;DR</span>
-      <p><mark class="rv rv-edit" title="Paper (§1): &quot;...neither source corpus provides diacritics, a phonetic tier, or variety-level stratification; our novel contribution is an evaluation that ties diacritization, G2P, ASR, and A2P together over the same utterances, grounded in audio and stratified by LA variety.&quot; The clause after the semicolon, capitalized.">Our novel contribution is an evaluation that ties diacritization, G2P, ASR, and A2P together over the same utterances, grounded in audio and stratified by LA variety.</mark></p>
+      <p>We introduce SHAMS, an evaluation benchmark that ties diacritization, G2P, ASR, and A2P together over the same utterances, grounded in audio and stratified by LA variety.</p>
     </div>
 
     <section id="abstract" aria-labelledby="h-abstract">
@@ -365,18 +349,19 @@
         <div>
           <p>Each utterance in SHAMS includes four aligned tiers:</p>
           <ol class="tierlist">
-            <li><span class="n">(i)</span><span class="t"><mark class="rv rv-edit" title="Paper (§2.2): &quot;the audio segment;&quot; Short form by Ben, 10 October.">The audio segment</mark></span></li>
-            <li><span class="n">(ii)</span><span class="t"><mark class="rv rv-edit" title="Paper (§2.2): &quot;unvocalized Arabic orthography, the consonantal text as conventionally written, corrected when needed to match the recording;&quot; Short form by Ben, 10 October.">Unvocalized Arabic orthography</mark></span></li>
-            <li><span class="n">(iii)</span><span class="t"><mark class="rv rv-edit" title="Paper (§2.2): &quot;fully diacritized Arabic, the same text with conventional diacritics matching the pronunciation in the audio;&quot; Short form by Ben, 10 October.">Fully diacritized Arabic</mark></span></li>
-            <li><span class="n">(iv)</span><span class="t"><mark class="rv rv-edit" title="Paper (§2.2): &quot;a phonetic transcription in a Semitic transcription system.&quot; Short form by Ben, 10 October.">Phonetic transcription</mark></span></li>
+            <li><span class="n">(i)</span><span class="t">The audio segment</span></li>
+            <li><span class="n">(ii)</span><span class="t">Unvocalized Arabic orthography</span></li>
+            <li><span class="n">(iii)</span><span class="t">Fully diacritized Arabic</span></li>
+            <li><span class="n">(iv)</span><span class="t">Phonetic transcription</span></li>
           </ol>
           <h3 class="sub">Four tasks</h3>
           <ul class="tasks">
-            <li><b>Diacritization</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Each parenthetical as written.">restoring vowel and gemination marks</mark></li>
-            <li><b>G2P</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Each parenthetical as written.">mapping orthography to phonetic transcription</mark></li>
-            <li><b>ASR</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Each parenthetical as written.">transcribing audio to text</mark></li>
-            <li><b>A2P</b><mark class="rv rv-edit" title="Paper (§1): &quot;diacritization (restoring vowel and gemination marks), grapheme-to-phoneme conversion (G2P; mapping orthography to phonetic transcription), automatic speech recognition (ASR; transcribing audio to text), and audio-to-phoneme conversion (A2P; transcribing audio to phonetic transcription)&quot;. Each parenthetical as written.">transcribing audio to phonetic transcription</mark></li>
+            <li><b>Diacritization</b>restoring vowel and gemination marks</li>
+            <li><b>G2P</b>mapping orthography to phonetic transcription</li>
+            <li><b>ASR</b>transcribing audio to text</li>
+            <li><b>A2P</b>transcribing audio to phonetic transcription</li>
           </ul>
+          <p class="acro">G2P: grapheme-to-phoneme conversion. ASR: automatic speech recognition. A2P: audio-to-phoneme conversion.</p>
         </div>
       </div>
     </section>
@@ -385,9 +370,9 @@
       <h2 id="h-comp">Composition</h2>
       <div class="comp">
         <div>
-          <p>SHAMS comprises 1,300 utterances totaling roughly 15,500 words and just over two hours of speech, spread across five Levantine varieties. <mark class="rv rv-edit" title="Paper (§2.1) ends at &quot;corpora.&quot;; &quot;Casablanca and LangMedia&quot; added from the next sentence.">The benchmark is built on the Levantine portions of two open multi-dialectal Arabic speech corpora, Casablanca and LangMedia.</mark></p>
+          <p>SHAMS comprises 1,300 utterances totaling roughly 15,500 words and just over two hours of speech, spread across five Levantine varieties. The benchmark is built on the Levantine portions of two open multi-dialectal Arabic speech corpora, Casablanca and LangMedia.</p>
           <table class="t1">
-            <caption>Table 1 · <mark class="rv rv-edit" title="Paper (Table 1): &quot;SHAMS composition by variety and source: utterances, words, the male/female share of words in per cent, and duration in minutes.&quot;">Utterances, words, and duration in minutes per variety.</mark> Palestinian Urban and Jordanian each draw on both source corpora; Palestinian Rural comes from Casablanca only, and Lebanese and Syrian from LangMedia only.</caption>
+            <caption>Table 1 · Utterances, words, and duration in minutes per variety. Palestinian Urban and Jordanian each draw on both source corpora; Palestinian Rural comes from Casablanca only, and Lebanese and Syrian from LangMedia only.</caption>
             <thead><tr><th scope="col">Variety</th><th scope="col" class="src">Source</th><th scope="col">Utt.</th><th scope="col">Words</th><th scope="col">Min.</th></tr></thead>
             <tbody>
               <tr><th scope="row"><span class="dot" style="--c:var(--lilac)"></span>Pal./Urban</th><td class="src">both</td><td>230</td><td><span class="wbar" style="--w:42;--c:var(--lilac)"></span>3,175</td><td>25.0</td></tr>
@@ -459,10 +444,6 @@
       });
     });
   })();
-</script>
-<section class="rv-list" id="rv-list" aria-label="Review list"><h2>Review list</h2><ol id="rv-ol"></ol></section>
-<script>
-(function(){var ol=document.getElementById('rv-ol');if(!ol)return;document.querySelectorAll('mark.rv[title]').forEach(function(m){var li=document.createElement('li');var q=document.createElement('span');q.className='q';q.textContent=(m.classList.contains('rv-new')?'[not in paper] ':'[edited] ')+m.textContent.trim();var n=document.createElement('span');n.className='note';n.textContent=m.title;li.appendChild(q);li.appendChild(n);ol.appendChild(li);});})();
 </script>
 </body>
 </html>
