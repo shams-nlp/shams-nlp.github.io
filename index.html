@@ -259,6 +259,231 @@
     .pill, .pill:hover { transition: none; transform: none; }
   }
 
+  /* ---------- dataset examples section (Figure 2 framed tiers) ---------- */
+  .examples-section { padding-top: 56px; }
+  .examples-head { margin-bottom: 22px; }
+  .examples-head h2 { margin: 0 0 6px; }
+  .examples-head p { margin: 0; font-size: 15.5px; color: var(--muted); }
+
+  .dialect-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .d-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 18px 8px 14px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    background: var(--ivory);
+    color: var(--ink);
+    font: 600 15px/1 var(--head);
+    cursor: pointer;
+    transition: background-color .15s, color .15s, transform .15s;
+  }
+  .d-tab:hover {
+    background: var(--peach);
+    transform: translateY(-1px);
+  }
+  .d-tab.active {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+  .d-tab .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--c);
+    flex-shrink: 0;
+  }
+
+  .tiers-stack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .tier-box.double {
+    position: relative;
+    background: var(--ivory);
+    border: 5px solid transparent;
+    border-image: url("assets/frame.svg") 24 / 24px stretch;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 84px;
+  }
+  .tier-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .tier-ic {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tier-ic svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .tier-label {
+    font: 600 16px/1.2 var(--head);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .tier-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 0;
+  }
+  .tier-content.text-ltr {
+    justify-content: flex-start;
+  }
+  .tier-ar {
+    font: 400 23px/1.35 var(--arabic);
+    color: var(--ink);
+    direction: rtl;
+    text-align: right;
+    word-break: break-word;
+  }
+  .tier-ar.tier-diac {
+    color: var(--flame);
+  }
+  .tier-ph {
+    font: 500 18px/1.4 var(--body);
+    color: var(--ink);
+    letter-spacing: .01em;
+    word-break: break-word;
+  }
+
+  .tier-player {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .tier-play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--ivory);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: transform .12s, background-color .12s, border-color .12s;
+  }
+  .tier-play-btn:hover {
+    background: var(--flame);
+    border-color: var(--flame);
+    transform: scale(1.05);
+  }
+  .tier-play-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+  .tier-waveform {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 38px;
+    flex: 1;
+    max-width: 480px;
+    cursor: pointer;
+    padding: 2px 0;
+  }
+  .tier-waveform i {
+    flex: 1;
+    min-width: 2px;
+    background: #c7c2b7;
+    border-radius: 2px;
+    transition: background-color .1s;
+  }
+  .tier-waveform i.active {
+    background: var(--flame);
+  }
+  .tier-time {
+    font: 600 13.5px var(--head);
+    color: var(--muted);
+    min-width: 72px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tier-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 0;
+    color: var(--ink);
+  }
+  .arrow-stem {
+    width: 2px;
+    height: 18px;
+    background: var(--ink);
+    position: relative;
+  }
+  .arrow-stem::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid var(--ink);
+  }
+  .arrow-badge {
+    font: 700 12px/1 var(--head);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--ivory);
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1.5px solid var(--ink);
+  }
+
+  @media (max-width: 720px) {
+    .tier-box.double {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      padding: 14px 16px;
+    }
+    .tier-content {
+      justify-content: flex-start;
+    }
+    .tier-ar {
+      font-size: 20px;
+    }
+    .tier-ph {
+      font-size: 16px;
+    }
+    .tier-player {
+      justify-content: flex-start;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -335,6 +560,128 @@
       <span class="k">TL;DR</span>
       <p>We introduce SHAMS, an evaluation benchmark that ties diacritization, G2P, ASR, and A2P together over the same utterances, grounded in audio and stratified by LA variety.</p>
     </div>
+
+    <section id="examples" class="examples-section" aria-labelledby="h-examples">
+      <div class="examples-head">
+        <div>
+          <h2 id="h-examples">Dataset Examples · Four Aligned Tiers</h2>
+          <p>Four-tier audio examples sampled from LangMedia under CC BY-SA 3.0, aligned across tiers (Figure 2).</p>
+        </div>
+      </div>
+
+      <div class="dialect-tabs" role="tablist" aria-label="Dialect variety tabs">
+        <button class="d-tab active" style="--c:var(--lilac)" onclick="selectDialect('pal_urban', this)" role="tab" aria-selected="true">
+          <span class="dot"></span> Palestinian
+        </button>
+        <button class="d-tab" style="--c:var(--magenta)" onclick="selectDialect('jordanian', this)" role="tab" aria-selected="false">
+          <span class="dot"></span> Jordanian
+        </button>
+        <button class="d-tab" style="--c:var(--coral)" onclick="selectDialect('lebanese', this)" role="tab" aria-selected="false">
+          <span class="dot"></span> Lebanese
+        </button>
+        <button class="d-tab" style="--c:var(--sky)" onclick="selectDialect('syrian', this)" role="tab" aria-selected="false">
+          <span class="dot"></span> Syrian
+        </button>
+      </div>
+
+      <div class="tiers-stack">
+        <!-- Tier (i) Audio -->
+        <div class="tier-box double" id="tier-audio-box">
+          <div class="tier-meta">
+            <div class="tier-ic">
+              <svg viewBox="25 20 66 66" aria-hidden="true">
+                <circle cx="58.25" cy="52.78" r="32.5" fill="#ea685b"/>
+                <g fill="none" stroke="#fbf8f0" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10">
+                  <line x1="33.46" y1="49.96" x2="33.46" y2="55.36"/><line x1="37.27" y1="47.42" x2="37.27" y2="56.57"/><line x1="41.09" y1="40.73" x2="41.09" y2="64.38"/><line x1="44.9" y1="39.04" x2="44.9" y2="68.53"/><line x1="48.71" y1="33.82" x2="48.71" y2="71.74"/><line x1="52.53" y1="40.64" x2="52.53" y2="68.04"/><line x1="56.34" y1="46.17" x2="56.34" y2="63.83"/><line x1="60.16" y1="48.09" x2="60.16" y2="59.47"/><line x1="63.97" y1="45.77" x2="63.97" y2="63.62"/><line x1="67.79" y1="40.29" x2="67.79" y2="68.62"/><line x1="71.6" y1="44.75" x2="71.6" y2="66.17"/><line x1="75.42" y1="48.77" x2="75.42" y2="59.02"/><line x1="79.23" y1="51.44" x2="79.23" y2="58.13"/><line x1="83.04" y1="52.26" x2="83.04" y2="55.53"/>
+                </g>
+              </svg>
+            </div>
+            <div class="tier-label">(i) Audio</div>
+          </div>
+          <div class="tier-content">
+            <div class="tier-player">
+              <button class="tier-play-btn" id="tier-play-btn" onclick="window.toggleExAudio()" aria-label="Play audio">
+                <svg id="tier-play-svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div class="tier-waveform" id="tier-waveform" onclick="window.seekExAudio(event)"></div>
+              <div class="tier-time" id="tier-time">0:00 / 0:03.9</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow: ASR -->
+        <div class="tier-arrow">
+          <div class="arrow-stem"></div>
+          <span class="arrow-badge">↓ ASR</span>
+        </div>
+
+        <!-- Tier (ii) Undiacritized -->
+        <div class="tier-box double" id="tier-undiac-box">
+          <div class="tier-meta">
+            <div class="tier-ic">
+              <svg viewBox="25 161 66 66" aria-hidden="true">
+                <circle cx="58.25" cy="193.84" r="32.5" fill="#9266c1"/>
+                <g fill="#fbf8f0">
+                  <path d="M32.07,200.17l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/><path d="M36.67,200.17l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/><path d="M41.27,200.17l.92-.58c1.53,0,2.73-.25,3.6-.75.86-.5,1.72-1.46,2.56-2.88l3.22-5.52c1.23-2.19,2.52-3.82,3.88-4.89,1.36-1.07,2.96-1.61,4.81-1.61s3.39.6,4.86,1.78c1.48,1.19,2.66,2.75,3.54,4.69.88,1.94,1.32,4.08,1.32,6.42,0,.5-.02,1-.06,1.5.88.84,2.34,1.27,4.37,1.27l.92.58v5.93l-.92.58c-2.8,0-5.1-.71-6.91-2.13-1.65,1.73-3.97,2.59-6.96,2.59-3.88,0-7.14-1.53-9.78-4.6-1.11,1.57-2.36,2.66-3.74,3.25-1.38.59-2.96.89-4.72.89l-.92-.58v-5.93ZM64.41,193.55c-.46-.92-1.08-1.67-1.84-2.24-.77-.58-1.63-.86-2.59-.86-1.92,0-3.61,1.44-5.06,4.32l-1.27,2.42c.84,1,1.89,1.81,3.14,2.45,1.25.63,2.58.95,4,.95,1.3,0,2.35-.35,3.14-1.06.79-.71,1.18-1.7,1.18-2.96,0-1.07-.23-2.07-.69-2.99Z"/><path d="M73.39,200.17l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/><path d="M77.99,200.17l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/>
+                </g>
+              </svg>
+            </div>
+            <div class="tier-label">(ii) Undiacritized</div>
+          </div>
+          <div class="tier-content">
+            <div class="tier-ar" id="tier-undiac-text" lang="ar" dir="rtl"></div>
+          </div>
+        </div>
+
+        <!-- Arrow: Diacritization -->
+        <div class="tier-arrow">
+          <div class="arrow-stem"></div>
+          <span class="arrow-badge">↓ Diacritization</span>
+        </div>
+
+        <!-- Tier (iii) Diacritized -->
+        <div class="tier-box double" id="tier-diac-box">
+          <div class="tier-meta">
+            <div class="tier-ic">
+              <svg viewBox="25 305 66 66" aria-hidden="true">
+                <circle cx="58.25" cy="337.98" r="32.5" fill="#fbf7f1" stroke="#ea685b" stroke-width="2"/>
+                <g fill="#ea685b">
+                  <path d="M32.06,346.45l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/><path d="M36.67,346.45l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/><path d="M53.3,314.45c0-1.8.65-3.45,1.96-4.95l1.78.98c-.38.58-.7,1.14-.95,1.7-.25.56-.37,1.08-.37,1.58,0,1.15.46,1.73,1.38,1.73s1.44-.38,1.55-1.15l.46-3.68,2.36.23-.35,3.17c-.08.77.44,1.15,1.55,1.15s1.67-.42,1.67-1.27c0-1.27-.56-2.67-1.67-4.2l2.3-1.32c.54.69.96,1.52,1.27,2.47.31.96.46,1.9.46,2.82,0,1.38-.37,2.49-1.09,3.31-.73.83-1.71,1.24-2.93,1.24-1.15,0-2.05-.36-2.71-1.09-.77.92-1.76,1.38-2.99,1.38-1.15,0-2.05-.36-2.71-1.09-.65-.73-.98-1.73-.98-2.99ZM65.73,323.08c-1.5.65-3.2,1.29-5.12,1.93s-4.01,1.22-6.27,1.75v-3.17c2.26-.54,4.35-1.11,6.25-1.73,1.9-.61,3.62-1.27,5.15-1.96v3.17Z"/><path d="M41.27,346.45l.92-.58c1.53,0,2.73-.25,3.6-.75.86-.5,1.72-1.46,2.56-2.88l3.22-5.52c1.23-2.19,2.52-3.82,3.88-4.89,1.36-1.07,2.96-1.61,4.81-1.61s3.39.6,4.86,1.78c1.48,1.19,2.66,2.75,3.54,4.69.88,1.94,1.32,4.08,1.32,6.42,0,.5-.02,1-.06,1.5.88.84,2.34,1.27,4.37,1.27l.92.58v5.93l-.92.58c-2.8,0-5.1-.71-6.91-2.13-1.65,1.73-3.97,2.59-6.96,2.59-3.88,0-7.14-1.53-9.78-4.6-1.11,1.57-2.36,2.66-3.74,3.25-1.38.59-2.96.89-4.72.89l-.92-.58v-5.93ZM64.41,339.83c-.46-.92-1.08-1.67-1.84-2.24-.77-.58-1.63-.86-2.59-.86-1.92,0-3.61,1.44-5.06,4.32l-1.27,2.42c.84,1,1.89,1.81,3.14,2.45,1.25.63,2.58.95,4,.95,1.3,0,2.35-.35,3.14-1.06.79-.71,1.18-1.7,1.18-2.96,0-1.07-.23-2.07-.69-2.99Z"/><path d="M73.38,346.45l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/><path d="M77.99,346.45l.92-.58h4.6l.92.58v5.93l-.92.58h-4.6l-.92-.58v-5.93Z"/>
+                </g>
+              </svg>
+            </div>
+            <div class="tier-label">(iii) Diacritized</div>
+          </div>
+          <div class="tier-content">
+            <div class="tier-ar tier-diac" id="tier-diac-text" lang="ar" dir="rtl"></div>
+          </div>
+        </div>
+
+        <!-- Arrow: G2P -->
+        <div class="tier-arrow">
+          <div class="arrow-stem"></div>
+          <span class="arrow-badge">↓ G2P</span>
+        </div>
+
+        <!-- Tier (iv) Phonemes -->
+        <div class="tier-box double" id="tier-phonetic-box">
+          <div class="tier-meta">
+            <div class="tier-ic">
+              <svg viewBox="25 448 66 66" aria-hidden="true">
+                <circle cx="58.25" cy="480.45" r="32.5" fill="#efe3e9" stroke="#8477a2" stroke-width="2"/>
+                <g fill="#5e45a5">
+                  <path d="M34.75,474.9h2.86l.15,1.66c.36-.63.87-1.13,1.54-1.5.67-.37,1.43-.55,2.3-.55,1.79,0,3,.74,3.63,2.23.41-.72.97-1.27,1.67-1.65.71-.38,1.53-.58,2.47-.58,1.42,0,2.51.43,3.3,1.3.78.87,1.18,2.09,1.18,3.66v7.37h-3.12v-6.86c0-1.81-.72-2.71-2.17-2.71-.84,0-1.49.3-1.97.91s-.72,1.44-.72,2.49v6.16h-3.12v-6.86c0-.89-.19-1.56-.58-2.02-.38-.46-.93-.69-1.62-.69-.82,0-1.47.3-1.96.91-.49.61-.73,1.44-.73,2.49v6.16h-3.12v-11.95Z"/><path d="M56.69,474.9h2.86l.15,1.66c.36-.63.87-1.13,1.54-1.5.67-.37,1.43-.55,2.3-.55,1.79,0,3,.74,3.63,2.23.41-.72.97-1.27,1.67-1.65.71-.38,1.53-.58,2.47-.58,1.42,0,2.51.43,3.3,1.3.78.87,1.18,2.09,1.18,3.66v7.37h-3.12v-6.86c0-1.81-.72-2.71-2.17-2.71-.84,0-1.49.3-1.97.91s-.72,1.44-.72,2.49v6.16h-3.12v-6.86c0-.89-.19-1.56-.58-2.02-.38-.46-.93-.69-1.62-.69-.82,0-1.47.3-1.96.91-.49.61-.73,1.44-.73,2.49v6.16h-3.12v-11.95Z"/><path d="M78.54,470.04h3.3v2.94h-3.3v-2.94ZM78.64,474.9h3.12v11.95h-3.12v-11.95Z"/>
+                </g>
+              </svg>
+            </div>
+            <div class="tier-label">(iv) Phonemes</div>
+          </div>
+          <div class="tier-content text-ltr">
+            <div class="tier-ph" id="tier-ph-text"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="abstract" aria-labelledby="h-abstract">
       <div class="absgrid">
@@ -463,6 +810,170 @@
         b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy BibTeX'; }, 1600);
       });
     });
+  })();
+</script>
+<script>
+  // Dataset audio and four-tier showcase (LangMedia only, Figure 2 framed tiers)
+  (function () {
+    var examples = {
+      pal_urban: {
+        audioSrc: "assets/audio/pal_urban_pal_25.mp3",
+        duration: "0:03.9",
+        durSec: 3.9,
+        undiacritized: "قديش المعلم بتوفر عندو المهارة بالتعليم",
+        diacritized: "قَدِّيش اِلمعَلِّم بِتوَفَّر عِندُو اِلمَهَارَة بِالتَّعلِيم",
+        phonetic: "ʾaddēš il-muʿallim bitwaffar ʿind-u il-mahāra bi-t-taʿlīm?"
+      },
+      jordanian: {
+        audioSrc: "assets/audio/jordanian_jor_21.mp3",
+        duration: "0:03.0",
+        durSec: 3.0,
+        undiacritized: "بنتمنى إلك يوم سعيد ونشوفك مرة تانية إن شاء الله",
+        diacritized: "بِنتَمَنَّى إِلِك يَوم سَعِيد ونشُوفِك مَرَّة تَانْيِة إِن شَاء الله",
+        phonetic: "bintmanna ʾilik yōm saʿīd w-nšūfik marra tānye ʾin šāʾ allāh"
+      },
+      lebanese: {
+        audioSrc: "assets/audio/lebanese_leb_9.mp3",
+        duration: "0:03.2",
+        durSec: 3.2,
+        undiacritized: "بس بلبنان في كتير أشياء حلوة ومميزة",
+        diacritized: "بَسّ بِلِبنَان فِي كِتِير أَشيَاء حِلوِة ومُمَيَّزِة",
+        phonetic: "bass bi-libnān fī ktīr ʾašyāʾ ḥilwe w-mmayyaze"
+      },
+      syrian: {
+        audioSrc: "assets/audio/syrian_syr_241.mp3",
+        duration: "0:05.9",
+        durSec: 5.9,
+        undiacritized: "من خبرتك الطويلة بالسوق، قديش تأثر الاقتصاد السوري بالأزمة هي؟",
+        diacritized: "مِن خِبرِتَك الطَّوِيلِة بِالسُّوق، قَدِّيش تَأَثُّر الاِقتِصَاد السُّورِي بِالأَزمِة هِيّ؟",
+        phonetic: "min ḫibritak iṭ-ṭawīle bis-sūʾ, ʾaddēš taʾassor il-iqtiṣād is-sūri bi-l-ʾazme hiyye?"
+      }
+    };
+
+    var heights = [22, 38, 65, 88, 54, 32, 48, 76, 96, 72, 46, 28, 42, 68, 92, 100, 78, 48, 32, 52, 74, 88, 62, 42, 26, 38, 58, 82, 68, 44, 32, 26, 38, 52, 32, 22];
+    var currentAudio = null;
+    var currentKey = "pal_urban";
+
+    function formatTime(s) {
+      if (isNaN(s)) return "0:00";
+      var m = Math.floor(s / 60);
+      var sec = Math.floor(s % 60);
+      return m + ":" + (sec < 10 ? "0" : "") + sec;
+    }
+
+    function initWaveform() {
+      var wf = document.getElementById("tier-waveform");
+      if (!wf) return;
+      wf.innerHTML = heights.map(function (h, i) {
+        return '<i data-idx="' + i + '" style="height:' + h + '%"></i>';
+      }).join("");
+    }
+
+    function updateWaveProgress(frac) {
+      var wf = document.getElementById("tier-waveform");
+      if (!wf) return;
+      var bars = wf.querySelectorAll("i");
+      var nActive = Math.round(frac * bars.length);
+      for (var i = 0; i < bars.length; i++) {
+        if (i < nActive) {
+          bars[i].classList.add("active");
+        } else {
+          bars[i].classList.remove("active");
+        }
+      }
+    }
+
+    function setDialect(key) {
+      currentKey = key;
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+      }
+      var ex = examples[key];
+      var playSvg = document.getElementById("tier-play-svg");
+      if (playSvg) {
+        playSvg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      }
+      var timeDisp = document.getElementById("tier-time");
+      if (timeDisp) {
+        timeDisp.textContent = "0:00 / " + ex.duration;
+      }
+      var undiacEl = document.getElementById("tier-undiac-text");
+      if (undiacEl) undiacEl.textContent = ex.undiacritized;
+      var diacEl = document.getElementById("tier-diac-text");
+      if (diacEl) diacEl.textContent = ex.diacritized;
+      var phEl = document.getElementById("tier-ph-text");
+      if (phEl) phEl.textContent = ex.phonetic;
+
+      updateWaveProgress(0);
+    }
+
+    window.selectDialect = function (key, btn) {
+      document.querySelectorAll(".dialect-tabs .d-tab").forEach(function (t) {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      if (btn) {
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+      }
+      setDialect(key);
+    };
+
+    window.toggleExAudio = function () {
+      var ex = examples[currentKey];
+      var playSvg = document.getElementById("tier-play-svg");
+      var timeDisp = document.getElementById("tier-time");
+
+      if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        if (playSvg) playSvg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        return;
+      }
+
+      if (!currentAudio) {
+        currentAudio = new Audio(ex.audioSrc);
+        currentAudio.addEventListener("timeupdate", function () {
+          var cur = currentAudio.currentTime;
+          var dur = currentAudio.duration || ex.durSec;
+          if (timeDisp) {
+            timeDisp.textContent = formatTime(cur) + " / " + ex.duration;
+          }
+          updateWaveProgress(cur / dur);
+        });
+        currentAudio.addEventListener("ended", function () {
+          if (playSvg) playSvg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+          if (timeDisp) timeDisp.textContent = "0:00 / " + ex.duration;
+          updateWaveProgress(0);
+        });
+      }
+
+      currentAudio.play().then(function () {
+        if (playSvg) playSvg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+      }).catch(function (err) {
+        console.warn("Audio playback failed:", err);
+      });
+    };
+
+    window.seekExAudio = function (e) {
+      var wf = document.getElementById("tier-waveform");
+      if (!wf) return;
+      var rect = wf.getBoundingClientRect();
+      var frac = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      var ex = examples[currentKey];
+      var dur = (currentAudio && currentAudio.duration) || ex.durSec;
+
+      if (!currentAudio) {
+        window.toggleExAudio();
+      }
+      if (currentAudio) {
+        currentAudio.currentTime = frac * dur;
+        updateWaveProgress(frac);
+      }
+    };
+
+    initWaveform();
+    setDialect("pal_urban");
   })();
 </script>
 </body>
