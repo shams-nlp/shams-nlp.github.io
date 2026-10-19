@@ -305,47 +305,7 @@
   .w-bar.active { fill: var(--flame); }
   .play-btn-circle { transition: fill .15s; }
   .svg-play-btn:hover .play-btn-circle { fill: var(--flame); }
-
-  
-  .layout-bar {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--cream, #f7f3e8);
-    border: 1px solid var(--sand, #dfd8c7);
-    padding: 4px 6px;
-    border-radius: 999px;
-  }
-  .layout-bar .l-tag {
-    font: 700 11px/1 var(--head, sans-serif);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--flame, #E84226);
-    padding: 0 6px 0 8px;
-  }
-  .l-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 12px;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: var(--muted, #666);
-    font: 600 12px/1 var(--head, sans-serif);
-    cursor: pointer;
-    transition: all .15s;
-  }
-  .l-pill:hover {
-    color: var(--ink, #201C3C);
-    background: rgba(0,0,0,0.04);
-  }
-  .l-pill.active {
-    background: var(--ink, #201C3C);
-    color: var(--ivory, #FCF9F1);
-    border-color: var(--ink, #201C3C);
-  }
-
-  .pills-bar {
+.pills-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -703,44 +663,6 @@
 </script>
 <script>
   (function () {
-    var currentLayout = "opt1";
-
-    var layouts = {
-      opt1: {
-        t1Label: "translate(15.65, 15.0) scale(0.65)",
-        t2Label: "translate(20.35, 66.55) scale(0.65)",
-        t3Label: "translate(25.02, 115.14) scale(0.65)",
-        t4Label: "translate(24.36, 165.43) scale(0.65)",
-        t1Player: "translate(180, 12)",
-        t2Y: "195.7",
-        t3Y: "338",
-        t4X: "228",
-        t4Y: "480.5"
-      },
-      opt2: {
-        t1Label: "translate(37.2, -3.0) scale(0.48)",
-        t2Label: "translate(40.65, 71.25) scale(0.48)",
-        t3Label: "translate(44.11, 145.07) scale(0.48)",
-        t4Label: "translate(43.62, 218.97) scale(0.48)",
-        t1Player: "translate(98, 28)",
-        t2Y: "206",
-        t3Y: "348",
-        t4X: "98",
-        t4Y: "490"
-      },
-      opt3: {
-        t1Label: "translate(15.65, 15.0) scale(0.65)",
-        t2Label: "translate(20.35, 66.55) scale(0.65)",
-        t3Label: "translate(25.02, 115.14) scale(0.65)",
-        t4Label: "translate(24.36, 165.43) scale(0.65)",
-        t1Player: "translate(180, 12)",
-        t2Y: "195.7",
-        t3Y: "338",
-        t4X: "228",
-        t4Y: "480.5"
-      }
-    };
-
     var dialects = {
       pal_urban: {
         t2: "قديش المعلم بتوفر عندو المهارة بالتعليم",
@@ -748,15 +670,8 @@
         t4: "ʾaddēš il-muʿallim bitwaffar ʿind-u il-mahāra bi-t-taʿlīm?",
         dur: "3.9s",
         src: "assets/audio/pal_urban_pal_25.mp3",
-        // opt3 punchy slice
-        t2_opt3: "قديش المعلم بتوفر عندو المهارة؟",
-        t3_opt3: "قَدِّيش اِلمعَلِّم بِتوَفَّر عِندُو اِلمَهَارَة؟",
-        t4_opt3: "ʾaddēš il-muʿallim bitwaffar ʿind-u il-mahāra?",
-        sizes: {
-          opt1: { ar: "20.5", lat: "16" },
-          opt2: { ar: "24", lat: "18" },
-          opt3: { ar: "23", lat: "17.5" }
-        }
+        arFs: "20.5",
+        latFs: "16"
       },
       jordanian: {
         t2: "إه من فضلك, وين أقرب موقف باص؟",
@@ -764,14 +679,8 @@
         t4: "ʾēh, min faḍlak, wēn ʾaʾrab mōʾif bāṣ?",
         dur: "3.0s",
         src: "assets/audio/jordanian_jor_21.mp3",
-        t2_opt3: "إه من فضلك, وين أقرب موقف باص؟",
-        t3_opt3: "إِه مِن فَضلِك, وِين أَقرَب مَوقِف بَاص؟",
-        t4_opt3: "ʾēh, min faḍlak, wēn ʾaʾrab mōʾif bāṣ?",
-        sizes: {
-          opt1: { ar: "21.5", lat: "16.5" },
-          opt2: { ar: "25", lat: "18.5" },
-          opt3: { ar: "23", lat: "17.5" }
-        }
+        arFs: "21.5",
+        latFs: "16.5"
       },
       lebanese: {
         t2: "بعدين بحب فرجيك كمان في عنا مشمش",
@@ -779,14 +688,8 @@
         t4: "baʿdēn bḥabb farjīki kamān fi ʿanna mušmuš",
         dur: "2.9s",
         src: "assets/audio/lebanese_leb_7.mp3",
-        t2_opt3: "بعدين في عنا كمان مشمش بلدي",
-        t3_opt3: "بَعدِين فِي عَنَّا كَمَان مِشمُش بَلَدِي",
-        t4_opt3: "baʿdēn fī ʿanna kamān mušmuš baladi",
-        sizes: {
-          opt1: { ar: "21.5", lat: "16.5" },
-          opt2: { ar: "25", lat: "18.5" },
-          opt3: { ar: "23", lat: "17.5" }
-        }
+        arFs: "21.5",
+        latFs: "16.5"
       },
       syrian: {
         t2: "و هو بالشام و انتي بحمص و اهلك من حلب",
@@ -794,56 +697,13 @@
         t4: "w hu bi-š-Šām w ʾinti bi-Ḥumṣ w ʾahlek min Ḥalab",
         dur: "3.0s",
         src: "assets/audio/syrian_syr_49.mp3",
-        t2_opt3: "و هو بالشام و اهلك من حلب",
-        t3_opt3: "و هُو بِالشَّام و اَهلِك مِن حَلَب",
-        t4_opt3: "w hu bi-š-Šām w ʾahlek min Ḥalab",
-        sizes: {
-          opt1: { ar: "21.0", lat: "16" },
-          opt2: { ar: "24.5", lat: "18" },
-          opt3: { ar: "23", lat: "17.5" }
-        }
+        arFs: "21.0",
+        latFs: "16"
       }
     };
 
     var currentDialect = "pal_urban";
     var currentAudio = null;
-
-    window.setLayout = function(mode, btn) {
-      currentLayout = mode;
-      document.querySelectorAll(".l-pill").forEach(function(b) {
-        b.classList.remove("active");
-        b.setAttribute("aria-selected", "false");
-      });
-      if (btn) {
-        btn.classList.add("active");
-        btn.setAttribute("aria-selected", "true");
-      }
-
-      var cfg = layouts[mode];
-      var t1Label = document.getElementById("t1-label");
-      var t2Label = document.getElementById("t2-label");
-      var t3Label = document.getElementById("t3-label");
-      var t4Label = document.getElementById("t4-label");
-      var t1Player = document.getElementById("t1-player");
-      var t2Txt = document.getElementById("t2-txt");
-      var t3Txt = document.getElementById("t3-txt");
-      var t4Txt = document.getElementById("t4-txt");
-
-      if (t1Label) t1Label.setAttribute("transform", cfg.t1Label);
-      if (t2Label) t2Label.setAttribute("transform", cfg.t2Label);
-      if (t3Label) t3Label.setAttribute("transform", cfg.t3Label);
-      if (t4Label) t4Label.setAttribute("transform", cfg.t4Label);
-      if (t1Player) t1Player.setAttribute("transform", cfg.t1Player);
-
-      if (t2Txt) t2Txt.setAttribute("y", cfg.t2Y);
-      if (t3Txt) t3Txt.setAttribute("y", cfg.t3Y);
-      if (t4Txt) {
-        t4Txt.setAttribute("x", cfg.t4X);
-        t4Txt.setAttribute("y", cfg.t4Y);
-      }
-
-      selectDialect(currentDialect);
-    };
 
     window.selectDialect = function (key, btn) {
       if (key) currentDialect = key;
@@ -860,26 +720,23 @@
       });
 
       var d = dialects[key];
-      var sz = d.sizes[currentLayout];
-      var isOpt3 = (currentLayout === "opt3");
-
       var t2El = document.getElementById("t2-txt");
       var t3El = document.getElementById("t3-txt");
       var t4El = document.getElementById("t4-txt");
       var timeEl = document.getElementById("time-txt");
 
       if (t2El) {
-        t2El.textContent = isOpt3 ? d.t2_opt3 : d.t2;
-        t2El.setAttribute("font-size", sz.ar);
+        t2El.textContent = d.t2;
+        t2El.setAttribute("font-size", d.arFs);
       }
       if (t3El) {
-        t3El.textContent = isOpt3 ? d.t3_opt3 : d.t3;
+        t3El.textContent = d.t3;
         t3El.setAttribute("fill", "#E84226");
-        t3El.setAttribute("font-size", sz.ar);
+        t3El.setAttribute("font-size", d.arFs);
       }
       if (t4El) {
-        t4El.textContent = isOpt3 ? d.t4_opt3 : d.t4;
-        t4El.setAttribute("font-size", sz.lat);
+        t4El.textContent = d.t4;
+        t4El.setAttribute("font-size", d.latFs);
       }
       if (timeEl) {
         timeEl.textContent = "0:00 / " + d.dur;
@@ -891,19 +748,6 @@
       }
       resetBars();
     };
-
-    // URL param support for layout and dialect previews
-    try {
-      var params = new URLSearchParams(window.location.search);
-      if (params.has('layout')) {
-        var lBtn = document.querySelector(".l-pill[onclick*='" + params.get('layout') + "']");
-        setLayout(params.get('layout'), lBtn);
-      }
-      if (params.has('dialect')) {
-        selectDialect(params.get('dialect'));
-      }
-    } catch(e) {}
-
 
     window.toggleAudio = function (e) {
       var d = dialects[currentDialect];
