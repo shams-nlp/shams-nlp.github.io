@@ -1,11 +1,3 @@
-@font-face {
-  font-family: 'Playpen Sans Arabic';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 800;
-  src: url('fonts/playpen-sans-arabic.woff2') format('woff2');
-}
-
 /* Self-hosted fonts from @fontsource (SIL Open Font License 1.1). */
 @font-face {
   font-family: 'Inter Tight';
