@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Analytics: public domains only; review URLs do not send traffic. -->
+<script>
+  if (["shams-nlp.github.io"].includes(window.location.hostname)) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag("js", new Date());
+    gtag("config", "G-PHQGB09F09", {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+    const analyticsTag = document.createElement("script");
+    analyticsTag.async = true;
+    analyticsTag.src = "https://www.googletagmanager.com/gtag/js?id=G-PHQGB09F09";
+    document.head.appendChild(analyticsTag);
+  }
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic</title>
