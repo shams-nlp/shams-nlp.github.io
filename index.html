@@ -259,20 +259,15 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       gap: 14px;
-      padding: 4px 4px 16px;
+      padding: 4px 4px 10px;
       margin: 0;
-      scrollbar-width: thin;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .stats ul::-webkit-scrollbar {
-      height: 4px;
-    }
-    .stats ul::-webkit-scrollbar-track {
-      background: rgba(32, 28, 60, 0.05);
-      border-radius: 4px;
-    }
-    .stats ul::-webkit-scrollbar-thumb {
-      background: rgba(232, 66, 38, 0.35);
-      border-radius: 4px;
+      display: none;
+      width: 0;
+      height: 0;
     }
     .stat {
       flex: 0 0 220px;
