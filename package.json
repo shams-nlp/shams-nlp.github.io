@@ -1,0 +1,17 @@
+{
+  "name": "shams-nlp.github.io",
+  "version": "1.0.0",
+  "description": "Project page for SHAMS, an audio-grounded pronunciation benchmark for Levantine Arabic.",
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --format=iife --outfile=assets/remotion-interactive.js --minify",
+    "watch": "esbuild src/main.ts --bundle --format=iife --outfile=assets/remotion-interactive.js --watch"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "esbuild": "^0.28.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "remotion": "^4.0.534"
+  }
+}

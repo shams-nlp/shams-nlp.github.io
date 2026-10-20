@@ -1,2 +1,4 @@
 .DS_Store
 _git_stale/
+node_modules/
+dist/
