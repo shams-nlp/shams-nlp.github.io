@@ -20,11 +20,97 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic</title>
-<meta name="description" content="SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic">
+<meta name="description" content="SHAMS: An open, audio-grounded, variety-stratified pronunciation benchmark for Levantine Arabic covering diacritization, G2P, ASR, and A2P across aligned tiers.">
+<meta name="author" content="Ben Sapirstein, Roy Mattar, Guy Mor-Lan, Ahlam Mohamed, Letizia Cerqueglini, Morris Alper">
+<meta name="keywords" content="SHAMS, Levantine Arabic, Arabic NLP, Arabic speech recognition, diacritization, G2P, A2P, pronunciation benchmark, linguistics, EMNLP, ArabicNLP">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://shams-nlp.github.io/">
 <meta name="theme-color" content="#FCF9F1">
 <link rel="icon" type="image/png" href="favicon.png">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shams-nlp.github.io/">
+<meta property="og:site_name" content="SHAMS Benchmark">
 <meta property="og:title" content="SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic">
+<meta property="og:description" content="An open, audio-grounded, variety-stratified pronunciation benchmark for Levantine Arabic covering diacritization, G2P, ASR, and A2P across aligned tiers.">
 <meta property="og:image" content="https://shams-nlp.github.io/shams-logo.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://shams-nlp.github.io/">
+<meta name="twitter:title" content="SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic">
+<meta name="twitter:description" content="An open, audio-grounded, variety-stratified pronunciation benchmark for Levantine Arabic covering diacritization, G2P, ASR, and A2P across aligned tiers.">
+<meta name="twitter:image" content="https://shams-nlp.github.io/shams-logo.png">
+
+<!-- Structured Data (JSON-LD) for Search Engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://shams-nlp.github.io/#website",
+      "url": "https://shams-nlp.github.io/",
+      "name": "SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic",
+      "description": "An open, audio-grounded, variety-stratified pronunciation benchmark for Levantine Arabic.",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://shams-nlp.github.io/#article",
+      "isPartOf": { "@id": "https://shams-nlp.github.io/#website" },
+      "headline": "SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic",
+      "name": "SHAMS: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic",
+      "description": "An open, audio-grounded, variety-stratified pronunciation benchmark for Levantine Arabic: diacritization, G2P, ASR, and A2P over the same utterances.",
+      "url": "https://shams-nlp.github.io/",
+      "sameAs": [
+        "https://arxiv.org/abs/2610.01427",
+        "https://github.com/bensapirstein/shams"
+      ],
+      "datePublished": "2026-10-04",
+      "inLanguage": "en",
+      "author": [
+        { "@type": "Person", "name": "Ben Sapirstein" },
+        { "@type": "Person", "name": "Roy Mattar" },
+        { "@type": "Person", "name": "Guy Mor-Lan" },
+        { "@type": "Person", "name": "Ahlam Mohamed" },
+        { "@type": "Person", "name": "Letizia Cerqueglini" },
+        { "@type": "Person", "name": "Morris Alper" }
+      ],
+      "keywords": [
+        "Levantine Arabic",
+        "Arabic NLP",
+        "Speech Recognition",
+        "ASR",
+        "Diacritization",
+        "Grapheme-to-Phoneme",
+        "G2P",
+        "Audio-to-Phoneme",
+        "A2P",
+        "Pronunciation Benchmark"
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://shams-nlp.github.io/#dataset",
+      "name": "SHAMS Dataset",
+      "description": "Four aligned tiers per utterance (audio, unvocalized Arabic orthography, diacritized Arabic, DIN-31635 phonetic transcription) across Levantine varieties.",
+      "url": "https://shams-nlp.github.io/",
+      "sameAs": "https://huggingface.co/datasets/shams-nlp/shams",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "creator": [
+        { "@type": "Person", "name": "Ben Sapirstein" },
+        { "@type": "Person", "name": "Roy Mattar" },
+        { "@type": "Person", "name": "Guy Mor-Lan" },
+        { "@type": "Person", "name": "Ahlam Mohamed" },
+        { "@type": "Person", "name": "Letizia Cerqueglini" },
+        { "@type": "Person", "name": "Morris Alper" }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preload" href="fonts/inter-tight-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css">
