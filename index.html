@@ -859,6 +859,12 @@
       resetBars();
     };
 
+    function resetBars() {
+      document.querySelectorAll('.w-bar').forEach(function(b) { b.classList.remove('active'); });
+      var icon = document.querySelector('.play-btn-icon');
+      if (icon) icon.setAttribute('d', 'M14,30 L26,39 L14,48 Z');
+    }
+
     window.toggleAudio = function (e) {
       var d = dialects[currentDialect];
       var icon = document.querySelector(".play-btn-icon");
