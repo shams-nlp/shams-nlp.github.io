@@ -35,7 +35,7 @@ export const SPEED_PROFILES: Record<SpeedOption, SpeedConfig> = {
     readingHoldSec: 1.5,
     glideSec: 1.4,
     totalIntroSec: 7.6,
-    mapDurationSec: 5.0,
+    mapDurationSec: 8.5,
     tiersDurationSec: 3.5,
   },
   medium: {
@@ -52,7 +52,7 @@ export const SPEED_PROFILES: Record<SpeedOption, SpeedConfig> = {
     readingHoldSec: 0.9,
     glideSec: 1.1,
     totalIntroSec: 5.0,
-    mapDurationSec: 3.5,
+    mapDurationSec: 6.8,
     tiersDurationSec: 2.4,
   },
   fast: {
@@ -69,7 +69,7 @@ export const SPEED_PROFILES: Record<SpeedOption, SpeedConfig> = {
     readingHoldSec: 0.5,
     glideSec: 0.8,
     totalIntroSec: 3.2,
-    mapDurationSec: 2.2,
+    mapDurationSec: 5.6,
     tiersDurationSec: 1.6,
   },
 };

@@ -99,8 +99,29 @@ export const AnimatedMap: React.FC<MapControllerProps> = ({ speed }) => {
 
   const labelStrength: PerVariety = perVariety(1);
 
+  const handleReplay = () => {
+    const config = SPEED_PROFILES[speed];
+    const durationMs = config.mapDurationSec * 1000;
+    const startTime = performance.now();
+
+    const loop = (now: number) => {
+      const elapsed = now - startTime;
+      const p = Math.min(1, Math.max(0, elapsed / durationMs));
+      setProgress(p);
+      if (p < 1) {
+        requestAnimationFrame(loop);
+      }
+    };
+    requestAnimationFrame(loop);
+  };
+
   return (
-    <div ref={containerRef} style={{ width: "100%", position: "relative" }}>
+    <div
+      ref={containerRef}
+      onClick={handleReplay}
+      title="Click to replay map animation"
+      style={{ width: "100%", position: "relative", cursor: "pointer" }}
+    >
       {/* Remotion Fig1Figure SVG Canvas (clean autonomous layout, no walkthrough guide) */}
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <Fig1Figure
