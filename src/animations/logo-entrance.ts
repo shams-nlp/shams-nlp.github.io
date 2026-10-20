@@ -9,7 +9,6 @@ export class LogoEntranceManager {
   private rafId: number | null = null;
   private overlayEl: HTMLElement | null = null;
   private lockupEl: HTMLElement | null = null;
-  private skipBtnEl: HTMLElement | null = null;
   private brandEl: HTMLElement | null = null;
   private ruleEl: HTMLElement | null = null;
 
@@ -72,27 +71,6 @@ export class LogoEntranceManager {
     `;
 
     // Create Skip button in upper right
-    this.skipBtnEl = document.createElement("button");
-    this.skipBtnEl.id = "shams-skip-btn";
-    this.skipBtnEl.innerHTML = "Skip Intro ✕";
-    this.skipBtnEl.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 24px;
-      z-index: 10000;
-      background: rgba(32, 28, 60, 0.08);
-      border: 1px solid rgba(32, 28, 60, 0.15);
-      border-radius: 14px;
-      padding: 6px 14px;
-      font-family: var(--head, "Inter Tight", sans-serif);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--ink, #201C3C);
-      cursor: pointer;
-      pointer-events: auto;
-      transition: all 0.2s;
-    `;
-    this.skipBtnEl.addEventListener("click", () => this.dock());
 
     // Create centered lockup container
     this.lockupEl = document.createElement("div");
@@ -139,7 +117,6 @@ export class LogoEntranceManager {
 
     document.body.appendChild(this.overlayEl);
     document.body.appendChild(this.lockupEl);
-    document.body.appendChild(this.skipBtnEl);
 
     this.runAnimationLoop();
   }
@@ -340,10 +317,6 @@ export class LogoEntranceManager {
     if (this.lockupEl && this.lockupEl.parentNode) {
       this.lockupEl.parentNode.removeChild(this.lockupEl);
       this.lockupEl = null;
-    }
-    if (this.skipBtnEl && this.skipBtnEl.parentNode) {
-      this.skipBtnEl.parentNode.removeChild(this.skipBtnEl);
-      this.skipBtnEl = null;
     }
     if (this.overlayEl && this.overlayEl.parentNode) {
       this.overlayEl.parentNode.removeChild(this.overlayEl);
