@@ -9,7 +9,6 @@ export class StatsAnimationController {
   private hasAnimated = false;
 
   // Sliding loop state
-  private hasCloned = false;
   private autoSlideTimer: any = null;
   private idleTimer: any = null;
   private currentIndex = 0;
@@ -23,7 +22,11 @@ export class StatsAnimationController {
     this.statsContainer = document.querySelector(".stats");
     this.statsUl = document.querySelector(".stats ul");
     if (this.statsUl) {
-      this.statItems = Array.from(this.statsUl.querySelectorAll("li.stat:not(.stat-clone)"));
+      // Remove any previously cloned nodes if present
+      const oldClones = this.statsUl.querySelectorAll(".stat-clone");
+      oldClones.forEach((c) => c.remove());
+
+      this.statItems = Array.from(this.statsUl.querySelectorAll("li.stat"));
       this.totalOriginal = this.statItems.length || 5;
     }
   }
@@ -94,22 +97,14 @@ export class StatsAnimationController {
     requestAnimationFrame(tick);
   }
 
+  private isMobileOrHorizontal(): boolean {
+    if (!this.statsUl) return false;
+    // Check if stats ul is overflowing horizontally
+    return this.statsUl.scrollWidth > this.statsUl.clientWidth + 10;
+  }
+
   private setupLoopSlider() {
     if (!this.statsUl || !this.statsContainer) return;
-
-    // Clone the items once to create a seamless infinite loop
-    if (!this.hasCloned && this.statItems.length === 5) {
-      this.statItems.forEach((item) => {
-        const clone = item.cloneNode(true) as HTMLElement;
-        clone.classList.add("stat-clone");
-        clone.setAttribute("aria-hidden", "true");
-        // Ensure clones are visible
-        clone.style.opacity = "1";
-        clone.style.transform = "none";
-        this.statsUl!.appendChild(clone);
-      });
-      this.hasCloned = true;
-    }
 
     // Create dot indicators
     let existingDots = this.statsContainer.querySelector(".stats-loop-nav") as HTMLElement | null;
@@ -140,7 +135,7 @@ export class StatsAnimationController {
       this.idleTimer = setTimeout(() => {
         this.isUserInteracting = false;
         this.syncCurrentIndexFromScroll();
-      }, 3200);
+      }, 3500);
     };
 
     this.statsUl.addEventListener("touchstart", onUserInteract, { passive: true });
@@ -177,7 +172,7 @@ export class StatsAnimationController {
 
   private checkSliderVisibility() {
     if (!this.statsUl || !this.dotsContainer) return;
-    const isScrollable = this.statsUl.scrollWidth > this.statsUl.clientWidth + 10;
+    const isScrollable = this.isMobileOrHorizontal();
     this.dotsContainer.style.display = isScrollable ? "flex" : "none";
   }
 
@@ -185,41 +180,23 @@ export class StatsAnimationController {
     if (this.autoSlideTimer) clearInterval(this.autoSlideTimer);
     this.autoSlideTimer = setInterval(() => {
       this.stepNext();
-    }, 2800);
+    }, 3000);
   }
 
   private stepNext() {
     if (!this.statsUl || this.isUserInteracting || document.hidden) return;
-    const isScrollable = this.statsUl.scrollWidth > this.statsUl.clientWidth + 10;
-    if (!isScrollable) return;
+    if (!this.isMobileOrHorizontal()) return;
 
-    const allChildren = Array.from(this.statsUl.children) as HTMLElement[];
-    if (allChildren.length === 0) return;
+    const cards = this.statItems;
+    if (cards.length === 0) return;
 
-    const nextIndex = this.currentIndex + 1;
-    if (nextIndex < allChildren.length) {
-      const targetCard = allChildren[nextIndex];
-      const left = targetCard.offsetLeft - this.statsUl.offsetLeft - 4;
-      this.statsUl.scrollTo({ left, behavior: "smooth" });
-      this.currentIndex = nextIndex;
-      this.updateDots(nextIndex % this.totalOriginal);
-
-      // If we just slid to the clone of the first item, silently loop back to item 0 after animation
-      if (nextIndex >= this.totalOriginal) {
-        setTimeout(() => {
-          if (!this.isUserInteracting && this.statsUl) {
-            const firstCard = allChildren[0];
-            const resetLeft = firstCard.offsetLeft - this.statsUl.offsetLeft - 4;
-            this.statsUl.scrollTo({ left: resetLeft, behavior: "instant" });
-            this.currentIndex = 0;
-            this.updateDots(0);
-          }
-        }, 500);
-      }
-    } else {
-      this.currentIndex = 0;
-      this.updateDots(0);
-    }
+    // Advance to next index, looping back from 4 to 0
+    let nextIndex = (this.currentIndex + 1) % cards.length;
+    const targetCard = cards[nextIndex];
+    const left = targetCard.offsetLeft - this.statsUl.offsetLeft - 4;
+    this.statsUl.scrollTo({ left, behavior: "smooth" });
+    this.currentIndex = nextIndex;
+    this.updateDots(nextIndex);
   }
 
   public goToIndex(index: number) {
@@ -227,13 +204,13 @@ export class StatsAnimationController {
     this.isUserInteracting = true;
     if (this.idleTimer) clearTimeout(this.idleTimer);
 
-    const allChildren = Array.from(this.statsUl.children) as HTMLElement[];
-    if (index >= 0 && index < allChildren.length) {
-      const targetCard = allChildren[index];
+    const cards = this.statItems;
+    if (index >= 0 && index < cards.length) {
+      const targetCard = cards[index];
       const left = targetCard.offsetLeft - this.statsUl.offsetLeft - 4;
       this.statsUl.scrollTo({ left, behavior: "smooth" });
       this.currentIndex = index;
-      this.updateDots(index % this.totalOriginal);
+      this.updateDots(index);
     }
 
     this.idleTimer = setTimeout(() => {
@@ -243,14 +220,14 @@ export class StatsAnimationController {
 
   private syncCurrentIndexFromScroll() {
     if (!this.statsUl) return;
-    const allChildren = Array.from(this.statsUl.children) as HTMLElement[];
-    if (allChildren.length === 0) return;
+    const cards = this.statItems;
+    if (cards.length === 0) return;
 
     const currentScroll = this.statsUl.scrollLeft + this.statsUl.offsetLeft;
     let closestIdx = 0;
     let minDiff = Infinity;
 
-    allChildren.forEach((child, idx) => {
+    cards.forEach((child, idx) => {
       const diff = Math.abs(child.offsetLeft - currentScroll - 4);
       if (diff < minDiff) {
         minDiff = diff;
@@ -259,7 +236,7 @@ export class StatsAnimationController {
     });
 
     this.currentIndex = closestIdx;
-    this.updateDots(closestIdx % this.totalOriginal);
+    this.updateDots(closestIdx);
   }
 
   private updateDots(activeIdx: number) {
