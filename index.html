@@ -22,7 +22,7 @@
 <title>SHAMS NLP: An Audio-Grounded Pronunciation Benchmark for Levantine Arabic</title>
 <meta name="description" content="SHAMS NLP: An open, audio-grounded, variety-stratified benchmark for Levantine Arabic NLP and speech processing, tying diacritization, G2P, ASR, and A2P across aligned tiers.">
 <meta name="author" content="Ben Sapirstein, Roy Mattar, Guy Mor-Lan, Ahlam Mohamed, Letizia Cerqueglini, Morris Alper">
-<meta name="keywords" content="SHAMS, Levantine Arabic, Arabic NLP, Arabic speech recognition, diacritization, G2P, A2P, pronunciation benchmark, linguistics, EMNLP, ArabicNLP">
+<meta name="keywords" content="SHAMS, SHAMS NLP, Levantine Arabic, Arabic NLP, Arabic speech recognition, diacritization, G2P, A2P, pronunciation benchmark, linguistics, EMNLP, ArabicNLP, shams-nlp">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="canonical" href="https://shams-nlp.github.io/">
 <meta name="theme-color" content="#FCF9F1">
@@ -595,7 +595,7 @@
       <div class="brand" aria-hidden="true">
         <svg viewBox="0 0 1160 540"><use href="#mark"/></svg>
         <span class="word">SHAMS</span>
-        <span class="exp"><b>SH</b>ami <b>A</b>nnotated <b>M</b>ulti-dialect <b>S</b>peech (SHAMS NLP)</span>
+        <span class="exp"><b>SH</b>ami <b>A</b>nnotated <b>M</b>ulti-dialect <b>S</b>peech</span>
       </div>
       <div>
         <p class="venue">ArabicNLP 2026</p>
@@ -647,7 +647,7 @@
 
     <div class="tldr double">
       <span class="k">TL;DR</span>
-      <p>We introduce <b>SHAMS (SHAMS NLP)</b>, an evaluation benchmark for Arabic NLP and speech technology that ties diacritization, G2P, ASR, and A2P together over the same utterances, grounded in audio and stratified by LA variety.</p>
+      <p>We introduce <b>SHAMS</b>, an evaluation benchmark for Arabic NLP and speech technology that ties diacritization, G2P, ASR, and A2P together over the same utterances, grounded in audio and stratified by LA variety.</p>
     </div>
 
     <section id="abstract" aria-labelledby="h-abstract">
@@ -656,7 +656,7 @@
       <h2 id="h-abstract">Abstract</h2>
       <div class="measure">
         <p>Levantine Arabic (LA) is spoken by tens of millions of people, creating a pressing need for shared benchmarks to evaluate LA speech-language technologies. Evaluating such technology is particularly challenging given LA’s internal diversity and its opaque and non-standardized orthography.</p>
-        <p>We present <b>SHAMS (SHAMS NLP)</b> (<i>SHami Annotated Multi-dialect Speech</i>), a benchmark comprising 1,300 utterances drawn from open audio corpora, balanced across five LA varieties (Urban and Rural Palestinian, and Urban Jordanian, Lebanese, and Syrian). Each utterance is represented across four aligned tiers: audio, unvocalized orthography, diacritized text, and phonetic transcription. This structure supports evaluation of various downstream tasks such as diacritization, grapheme-to-phoneme conversion, automatic speech recognition, and audio-to-phoneme, grounded in audio and stratified by variety. We benchmark open and proprietary models across these tasks to demonstrate the utility of this benchmark for measuring progress across LA.</p>
+        <p>We present <b>SHAMS</b> (<i>SHami Annotated Multi-dialect Speech</i>), a benchmark comprising 1,300 utterances drawn from open audio corpora, balanced across five LA varieties (Urban and Rural Palestinian, and Urban Jordanian, Lebanese, and Syrian). Each utterance is represented across four aligned tiers: audio, unvocalized orthography, diacritized text, and phonetic transcription. This structure supports evaluation of various downstream tasks such as diacritization, grapheme-to-phoneme conversion, automatic speech recognition, and audio-to-phoneme, grounded in audio and stratified by variety. We benchmark open and proprietary models across these tasks to demonstrate the utility of this benchmark for measuring progress across LA.</p>
       </div>
       </div>
       <div class="dotted-v" aria-hidden="true"></div>
@@ -824,7 +824,7 @@
 
 <footer class="site">
   <div class="wrap">
-    <a class="fbrand" href="#top" aria-label="SHAMS, back to top"><svg viewBox="0 0 1160 540" aria-hidden="true"><use href="#mark"/></svg><span>SHAMS</span></a>
+    <a class="fbrand" href="#top" aria-label="SHAMS NLP, back to top"><svg viewBox="0 0 1160 540" aria-hidden="true"><use href="#mark"/></svg><span>SHAMS</span><span class="sr"> NLP</span></a>
     <ul class="flinks">
       <li><a href="https://arxiv.org/abs/2610.01427"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.5 0.5H12L17.5 6V18.5A1 1 0 0 1 16.5 19.5H4.5A1 1 0 0 1 3.5 18.5V1.5A1 1 0 0 1 4.5 0.5Z"/><path fill="none" stroke="var(--icon-bg)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M12 1V5A1 1 0 0 0 13 6H17"/><path fill="none" stroke="var(--icon-bg)" stroke-width="1.5" stroke-linecap="round" d="M6.5 10H14.5M6.5 13H14.5M6.5 16H11"/></svg>Paper</a></li>
       <li><a href="https://github.com/bensapirstein/shams"><svg viewBox="84 7399 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"/></svg>Code</a></li>
