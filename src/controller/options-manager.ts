@@ -1,5 +1,4 @@
 import { LogoEntranceManager } from "../animations/logo-entrance";
-import { mountAnimatedMap } from "../animations/map-controller";
 import { TiersAnimationController } from "../animations/tiers-controller";
 import { StatsAnimationController } from "../animations/stats-controller";
 import { SpeedOption } from "../lib/speed-profiles";
@@ -38,7 +37,7 @@ export class OptionsManager {
   public applySpeed(speed: SpeedOption = "fast", triggerIntro = true) {
     this.currentSpeed = speed;
     this.logoManager.setSpeed(speed);
-    mountAnimatedMap(speed);
+    // Figure 1 animated map reverted per user request - static image kept
     this.tiersController.setSpeed(speed);
     this.statsController.init();
 

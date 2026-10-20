@@ -1,6 +1,3 @@
-import { interpolate } from "remotion";
-import { POP, enter } from "../lib/scene";
-
 export class StatsAnimationController {
   private statsContainer: HTMLElement | null = null;
   private statsUl: HTMLElement | null = null;
@@ -8,21 +5,16 @@ export class StatsAnimationController {
   private observer: IntersectionObserver | null = null;
   private hasAnimated = false;
 
-  // Sliding loop state
-  private autoSlideTimer: any = null;
-  private idleTimer: any = null;
-  private currentIndex = 0;
-  private totalOriginal = 5;
-  private isUserInteracting = false;
   private dotsContainer: HTMLElement | null = null;
   private dotEls: HTMLElement[] = [];
-  private scrollDebounce: any = null;
+  private totalOriginal = 5;
+  private currentIndex = 0;
+  private scrollDebounce: number | null = null;
 
   constructor() {
-    this.statsContainer = document.querySelector(".stats");
+    this.statsContainer = document.querySelector(".teaser .stats");
     this.statsUl = document.querySelector(".stats ul");
     if (this.statsUl) {
-      // Remove any previously cloned nodes if present
       const oldClones = this.statsUl.querySelectorAll(".stat-clone");
       oldClones.forEach((c) => c.remove());
 
@@ -53,8 +45,8 @@ export class StatsAnimationController {
 
     this.observer.observe(this.statsUl);
 
-    // Setup horizontal sliding loop
-    this.setupLoopSlider();
+    // Setup horizontal slider for user-driven scrolling
+    this.setupSlider();
   }
 
   private animateStats() {
@@ -99,14 +91,17 @@ export class StatsAnimationController {
 
   private isMobileOrHorizontal(): boolean {
     if (!this.statsUl) return false;
-    // Check if stats ul is overflowing horizontally
     return this.statsUl.scrollWidth > this.statsUl.clientWidth + 10;
   }
 
-  private setupLoopSlider() {
+  private setupSlider() {
     if (!this.statsUl || !this.statsContainer) return;
 
-    // Create dot indicators
+    // Reset scroll position to beginning (1,300 utterances and 2+ hours of speech)
+    this.statsUl.scrollLeft = 0;
+    this.currentIndex = 0;
+
+    // Create dot indicators if not already present
     let existingDots = this.statsContainer.querySelector(".stats-loop-nav") as HTMLElement | null;
     if (!existingDots) {
       this.dotsContainer = document.createElement("div");
@@ -128,27 +123,9 @@ export class StatsAnimationController {
       this.dotEls = Array.from(existingDots.querySelectorAll(".stats-loop-dot"));
     }
 
-    // Listeners for user interaction to pause/resume auto-slide
-    const onUserInteract = () => {
-      this.isUserInteracting = true;
-      if (this.idleTimer) clearTimeout(this.idleTimer);
-      this.idleTimer = setTimeout(() => {
-        this.isUserInteracting = false;
-        this.syncCurrentIndexFromScroll();
-      }, 3500);
-    };
+    this.updateDots(0);
 
-    this.statsUl.addEventListener("touchstart", onUserInteract, { passive: true });
-    this.statsUl.addEventListener("pointerdown", onUserInteract, { passive: true });
-    this.statsUl.addEventListener("wheel", onUserInteract, { passive: true });
-    this.statsUl.addEventListener("mouseenter", () => { this.isUserInteracting = true; });
-    this.statsUl.addEventListener("mouseleave", () => {
-      this.idleTimer = setTimeout(() => {
-        this.isUserInteracting = false;
-        this.syncCurrentIndexFromScroll();
-      }, 1500);
-    });
-
+    // Passive scroll listener to update active dot when user scrolls manually
     this.statsUl.addEventListener(
       "scroll",
       () => {
@@ -160,10 +137,7 @@ export class StatsAnimationController {
       { passive: true }
     );
 
-    // Start auto-slide timer
-    this.startAutoSlide();
-
-    // Check on resize
+    // Check visibility on resize
     window.addEventListener("resize", () => {
       this.checkSliderVisibility();
     });
@@ -176,33 +150,8 @@ export class StatsAnimationController {
     this.dotsContainer.style.display = isScrollable ? "flex" : "none";
   }
 
-  private startAutoSlide() {
-    if (this.autoSlideTimer) clearInterval(this.autoSlideTimer);
-    this.autoSlideTimer = setInterval(() => {
-      this.stepNext();
-    }, 3000);
-  }
-
-  private stepNext() {
-    if (!this.statsUl || this.isUserInteracting || document.hidden) return;
-    if (!this.isMobileOrHorizontal()) return;
-
-    const cards = this.statItems;
-    if (cards.length === 0) return;
-
-    // Advance to next index, looping back from 4 to 0
-    let nextIndex = (this.currentIndex + 1) % cards.length;
-    const targetCard = cards[nextIndex];
-    const left = targetCard.offsetLeft - this.statsUl.offsetLeft - 4;
-    this.statsUl.scrollTo({ left, behavior: "smooth" });
-    this.currentIndex = nextIndex;
-    this.updateDots(nextIndex);
-  }
-
   public goToIndex(index: number) {
     if (!this.statsUl) return;
-    this.isUserInteracting = true;
-    if (this.idleTimer) clearTimeout(this.idleTimer);
 
     const cards = this.statItems;
     if (index >= 0 && index < cards.length) {
@@ -212,10 +161,6 @@ export class StatsAnimationController {
       this.currentIndex = index;
       this.updateDots(index);
     }
-
-    this.idleTimer = setTimeout(() => {
-      this.isUserInteracting = false;
-    }, 3500);
   }
 
   private syncCurrentIndexFromScroll() {
@@ -255,14 +200,6 @@ export class StatsAnimationController {
     if (this.observer) {
       this.observer.disconnect();
       this.observer = null;
-    }
-    if (this.autoSlideTimer) {
-      clearInterval(this.autoSlideTimer);
-      this.autoSlideTimer = null;
-    }
-    if (this.idleTimer) {
-      clearTimeout(this.idleTimer);
-      this.idleTimer = null;
     }
     this.hasAnimated = false;
   }
