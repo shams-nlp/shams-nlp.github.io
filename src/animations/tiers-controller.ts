@@ -1,16 +1,14 @@
-import { interpolate, Easing } from "remotion";
-import { EASE, POP, enter, riseIn } from "../lib/scene";
-
-export type TiersMode = "autonomous" | "scrollytelling" | "interactive";
+import { interpolate } from "remotion";
+import { EASE, enter } from "../lib/scene";
+import { SpeedOption, SPEED_PROFILES } from "../lib/speed-profiles";
 
 export class TiersAnimationController {
-  private mode: TiersMode = "autonomous";
+  private speed: SpeedOption = "medium";
   private containerEl: HTMLElement | null = null;
   private tiersSvg: SVGSVGElement | null = null;
   private tierEls: (SVGGraphicsElement | null)[] = [];
   private arrowEls: { [key: string]: SVGGraphicsElement | null } = {};
   private hasAnimated = false;
-  private scrollHandler: (() => void) | null = null;
   private observer: IntersectionObserver | null = null;
   private activeHighlight: string | null = null;
 
@@ -33,8 +31,8 @@ export class TiersAnimationController {
     };
   }
 
-  public setMode(mode: TiersMode) {
-    this.mode = mode;
+  public setSpeed(speed: SpeedOption) {
+    this.speed = speed;
     this.cleanup();
     this.init();
   }
@@ -42,7 +40,6 @@ export class TiersAnimationController {
   public init() {
     if (!this.containerEl || !this.tiersSvg) return;
 
-    // Prepare elements with transitions
     this.tierEls.forEach((el) => {
       if (el) {
         el.style.transformOrigin = "50% 50%";
@@ -56,62 +53,39 @@ export class TiersAnimationController {
       }
     });
 
-    if (this.mode === "autonomous") {
-      this.initAutonomous();
-    } else if (this.mode === "scrollytelling") {
-      this.initScrollytelling();
-    } else {
-      this.initInteractive();
-    }
-  }
-
-  private initAutonomous() {
-    // Reset to hidden before viewport entrance
+    // Reset before viewport trigger
     this.setFrame(0);
+
+    const config = SPEED_PROFILES[this.speed];
+    const durationMs = config.tiersDurationSec * 1000;
 
     this.observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !this.hasAnimated) {
           this.hasAnimated = true;
-          let f = 0;
-          const totalFrames = 60; // 2 seconds
-          const interval = setInterval(() => {
-            f += 1;
-            this.setFrame(f);
-            if (f >= totalFrames) clearInterval(interval);
-          }, 1000 / 30);
+          const startTime = performance.now();
+
+          const loop = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(1, Math.max(0, elapsed / durationMs));
+            this.setFrame(progress * 60);
+            if (progress < 1) {
+              requestAnimationFrame(loop);
+            }
+          };
+          requestAnimationFrame(loop);
         }
       },
       { threshold: 0.15 }
     );
 
     if (this.containerEl) this.observer.observe(this.containerEl);
+
+    // Setup interactive task arrow clicks/hovers
+    this.setupInteractivity();
   }
 
-  private initScrollytelling() {
-    this.scrollHandler = () => {
-      if (!this.containerEl) return;
-      const rect = this.containerEl.getBoundingClientRect();
-      const windowH = window.innerHeight;
-
-      const start = windowH * 0.85;
-      const end = windowH * 0.2;
-      const total = start - end;
-      const current = start - rect.top;
-      const rawProgress = Math.min(1, Math.max(0, current / total));
-
-      this.setFrame(Math.round(rawProgress * 60));
-    };
-
-    window.addEventListener("scroll", this.scrollHandler, { passive: true });
-    this.scrollHandler();
-  }
-
-  private initInteractive() {
-    // Reveal all elements immediately
-    this.setFrame(60);
-
-    // Setup task hover and click highlighting
+  private setupInteractivity() {
     const taskMap: { [key: string]: { relatedTiers: number[]; arrowKey: string } } = {
       asr: { relatedTiers: [0, 1], arrowKey: "asr" },
       diac: { relatedTiers: [1, 2], arrowKey: "diac" },
@@ -143,7 +117,6 @@ export class TiersAnimationController {
   private highlightTask(taskKey: string, relatedTiers: number[]) {
     this.activeHighlight = taskKey;
 
-    // Highlight active arrow
     Object.entries(this.arrowEls).forEach(([k, el]) => {
       if (!el) return;
       if (k === taskKey) {
@@ -155,7 +128,6 @@ export class TiersAnimationController {
       }
     });
 
-    // Dim non-related tiers
     this.tierEls.forEach((el, idx) => {
       if (!el) return;
       if (relatedTiers.includes(idx)) {
@@ -187,7 +159,7 @@ export class TiersAnimationController {
   private setFrame(frame: number) {
     if (this.activeHighlight) return;
 
-    // Tier 1 to 4 staggered entrance: frames 0 to 36
+    // Staggered tier entrance (tier 1 to 4)
     const tierStarts = [0, 8, 16, 24];
     this.tierEls.forEach((el, i) => {
       if (!el) return;
@@ -198,7 +170,7 @@ export class TiersAnimationController {
       el.style.transform = `translate3d(0, ${rise}px, 0)`;
     });
 
-    // Arrows entrance: frames 32 to 56
+    // Connecting arrows
     const arrowKeys = ["asr", "diac", "g2p", "a2p"];
     const arrowStarts = [30, 36, 42, 48];
     arrowKeys.forEach((key, i) => {
@@ -212,10 +184,6 @@ export class TiersAnimationController {
   }
 
   private cleanup() {
-    if (this.scrollHandler) {
-      window.removeEventListener("scroll", this.scrollHandler);
-      this.scrollHandler = null;
-    }
     if (this.observer) {
       this.observer.disconnect();
       this.observer = null;
