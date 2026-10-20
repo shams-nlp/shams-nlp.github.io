@@ -82,7 +82,7 @@
   .brand svg { width: 100%; height: auto; display: block; }
   .brand .word { display: block; font: 700 64px/1 var(--head); letter-spacing: .01em; margin-top: 2px; }
   .brand .exp { display: block; white-space: nowrap; font: 400 13px/1.3 var(--head); margin-top: 8px; color: var(--ink); }
-  .brand .exp b { font-weight: 700; }
+  .brand .exp b { font-weight: 700; color: var(--flame); }
   h1.title { margin: 0; font: 500 clamp(30px, 3.9vw, 53px)/1.06 var(--head); letter-spacing: .028em; max-width: 15.5em; }
   h1.title span { display: block; }
   h1.title .hl { color: var(--flame); }
@@ -131,6 +131,34 @@
   .stat .n small { font-size: .55em; letter-spacing: 0; margin-left: 4px; }
   .stat .l { display: block; font: 600 20px/1.2 var(--head); margin-top: 6px; color: var(--ink); }
   .stat:nth-child(odd) .l { color: var(--flame); }
+
+  .stats-loop-nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 4px 0 6px;
+  }
+  .stats-loop-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(32, 28, 60, 0.22);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .stats-loop-dot:hover {
+    background: rgba(232, 66, 38, 0.5);
+  }
+  .stats-loop-dot.active {
+    width: 22px;
+    border-radius: 4px;
+    background: var(--flame);
+  }
+
 
   .tldr { margin: 56px 0 0; padding: 22px 28px 22px 26px; display: grid; grid-template-columns: auto 1fr; gap: 6px 22px; align-items: baseline; }
   .tldr .k { font: 700 14px/1 var(--head); letter-spacing: .08em; color: var(--flame); }
@@ -218,6 +246,7 @@
       padding-top: 0;
       width: 100%;
     }
+    .stats-loop-nav { display: flex; }
     .stats h2 {
       margin-bottom: 16px;
       font-size: 22px;
