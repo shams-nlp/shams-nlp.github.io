@@ -5,7 +5,7 @@ import { StatsAnimationController } from "../animations/stats-controller";
 import { SpeedOption, SPEED_PROFILES, SpeedConfig } from "../lib/speed-profiles";
 
 export class OptionsManager {
-  private currentSpeed: SpeedOption = "medium";
+  private currentSpeed: SpeedOption = "fast";
   private logoManager: LogoEntranceManager;
   private tiersController: TiersAnimationController;
   private statsController: StatsAnimationController;
@@ -23,6 +23,9 @@ export class OptionsManager {
     const saved = localStorage.getItem("shams_animation_speed") as SpeedOption | null;
     if (saved && (saved === "slow" || saved === "medium" || saved === "fast")) {
       this.currentSpeed = saved;
+    } else {
+      this.currentSpeed = "fast";
+      localStorage.setItem("shams_animation_speed", "fast");
     }
   }
 
@@ -120,7 +123,7 @@ export class OptionsManager {
       </div>
 
       <div style="display: flex; gap: 4px; background: rgba(32, 28, 60, 0.06); padding: 4px; border-radius: 12px;">
-        <button data-speed="slow" class="speed-btn" style="
+        <button data-speed="fast" class="speed-btn" style="
           flex: 1;
           padding: 6px 10px;
           border: none;
@@ -128,12 +131,12 @@ export class OptionsManager {
           font-size: 12px;
           font-weight: 600;
           cursor: pointer;
-          background: ${this.currentSpeed === "slow" ? "var(--ink, #201C3C)" : "transparent"};
-          color: ${this.currentSpeed === "slow" ? "var(--ivory, #FCF9F1)" : "var(--ink, #201C3C)"};
+          background: ${this.currentSpeed === "fast" ? "var(--ink, #201C3C)" : "transparent"};
+          color: ${this.currentSpeed === "fast" ? "var(--ivory, #FCF9F1)" : "var(--ink, #201C3C)"};
           transition: all 0.2s;
           white-space: nowrap;
         ">
-          Slow (~7.6s)
+          Fast (~3.2s) ★
         </button>
         <button data-speed="medium" class="speed-btn" style="
           flex: 1;
@@ -150,7 +153,7 @@ export class OptionsManager {
         ">
           Medium (~5.0s)
         </button>
-        <button data-speed="fast" class="speed-btn" style="
+        <button data-speed="slow" class="speed-btn" style="
           flex: 1;
           padding: 6px 10px;
           border: none;
@@ -158,12 +161,12 @@ export class OptionsManager {
           font-size: 12px;
           font-weight: 600;
           cursor: pointer;
-          background: ${this.currentSpeed === "fast" ? "var(--ink, #201C3C)" : "transparent"};
-          color: ${this.currentSpeed === "fast" ? "var(--ivory, #FCF9F1)" : "var(--ink, #201C3C)"};
+          background: ${this.currentSpeed === "slow" ? "var(--ink, #201C3C)" : "transparent"};
+          color: ${this.currentSpeed === "slow" ? "var(--ivory, #FCF9F1)" : "var(--ink, #201C3C)"};
           transition: all 0.2s;
           white-space: nowrap;
         ">
-          Fast (~3.2s)
+          Slow (~7.6s)
         </button>
       </div>
 

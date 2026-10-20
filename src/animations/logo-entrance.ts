@@ -1,21 +1,19 @@
 import { interpolate } from "remotion";
-import { EASE, POP, enter, f } from "../lib/scene";
+import { EASE, POP, enter } from "../lib/scene";
 import { SpeedOption, SPEED_PROFILES, SpeedConfig } from "../lib/speed-profiles";
 
 export class LogoEntranceManager {
-  private speed: SpeedOption = "medium";
+  private speed: SpeedOption = "fast";
   private isAnimating = false;
   private isDocked = false;
   private rafId: number | null = null;
   private overlayEl: HTMLElement | null = null;
   private lockupEl: HTMLElement | null = null;
   private skipBtnEl: HTMLElement | null = null;
-  private targetSvg: SVGSVGElement | null = null;
   private brandEl: HTMLElement | null = null;
   private ruleEl: HTMLElement | null = null;
 
   constructor() {
-    this.targetSvg = document.querySelector(".brand svg");
     this.brandEl = document.querySelector(".brand");
     this.ruleEl = document.querySelector("hr.rule");
   }
@@ -150,19 +148,18 @@ export class LogoEntranceManager {
     const config: SpeedConfig = SPEED_PROFILES[this.speed];
     const startTime = performance.now();
 
-    // Cue timeline in seconds
     const t0 = 0;
-    const t1 = t0 + config.markPopSec;                                // Mark pop completes
-    const t2 = t1 + config.markHoldSec;                               // Mark alone hold ends, wordmark begins
-    const t3 = t2 + config.wordmarkSec;                               // Wordmark reveal completes
-    const t4 = t3 + config.wordHoldSec;                               // Brief hold before acronym
+    const t1 = t0 + config.markPopSec;                                
+    const t2 = t1 + config.markHoldSec;                               
+    const t3 = t2 + config.wordmarkSec;                               
+    const t4 = t3 + config.wordHoldSec;                               
     const tWord1 = t4;
     const tWord2 = tWord1 + config.acronymGapSec;
     const tWord3 = tWord2 + config.acronymGapSec;
     const tWord4 = tWord3 + config.acronymGapSec;
     const tAcronymDone = tWord4 + config.acronymWordSec;
-    const tGlideStart = tAcronymDone + config.readingHoldSec;          // Glide to header begins
-    const tGlideEnd = tGlideStart + config.glideSec;                  // Flight completes and docks
+    const tGlideStart = tAcronymDone + config.readingHoldSec;          
+    const tGlideEnd = tGlideStart + config.glideSec;                  
 
     const markBox = this.lockupEl?.querySelector("#intro-mark-box") as HTMLElement | null;
     const introWord = this.lockupEl?.querySelector("#intro-word") as HTMLElement | null;
@@ -176,7 +173,6 @@ export class LogoEntranceManager {
     const tick = (now: number) => {
       const elapsedSec = (now - startTime) / 1000;
 
-      // Target position in header
       const targetRect = this.brandEl?.getBoundingClientRect() || {
         left: 40,
         top: 60,
@@ -184,7 +180,6 @@ export class LogoEntranceManager {
         height: 180,
       };
 
-      // Centered initial position
       const startWidth = Math.min(window.innerWidth * 0.65, 400);
       const startHeight = (startWidth * 540) / 1160 + 120;
       const startX = window.innerWidth / 2 - startWidth / 2;
@@ -195,13 +190,11 @@ export class LogoEntranceManager {
       const endWidth = targetRect.width;
 
       if (elapsedSec < tGlideStart) {
-        // --- Centered Entrance Phases ---
         if (this.lockupEl) {
           this.lockupEl.style.width = `${startWidth}px`;
           this.lockupEl.style.transform = `translate3d(${startX}px, ${startY}px, 0)`;
         }
 
-        // 1. Mark pop
         if (elapsedSec <= t1) {
           const p = Math.min(1, Math.max(0, (elapsedSec - t0) / config.markPopSec));
           const popEased = POP(p);
@@ -218,7 +211,6 @@ export class LogoEntranceManager {
           }
         }
 
-        // 2. Wordmark "SHAMS"
         if (elapsedSec >= t2 && introWord) {
           const p = Math.min(1, Math.max(0, (elapsedSec - t2) / config.wordmarkSec));
           const eased = EASE(p);
@@ -226,7 +218,6 @@ export class LogoEntranceManager {
           introWord.style.transform = `translateY(${(1 - eased) * 16}px)`;
         }
 
-        // 3. Acronym words: word after word
         const wordStarts = [tWord1, tWord2, tWord3, tWord4];
         acWords.forEach((wEl, idx) => {
           if (!wEl) return;
@@ -239,7 +230,6 @@ export class LogoEntranceManager {
           }
         });
       } else if (elapsedSec < tGlideEnd) {
-        // --- Glide / Docking Phase ---
         const glideProgress = Math.min(1, Math.max(0, (elapsedSec - tGlideStart) / config.glideSec));
         const easedGlide = EASE(glideProgress);
 
@@ -247,7 +237,6 @@ export class LogoEntranceManager {
         const curY = interpolate(easedGlide, [0, 1], [startY, endY]);
         const curW = interpolate(easedGlide, [0, 1], [startWidth, endWidth]);
 
-        // Font scaling during glide
         const targetWordSize = window.innerWidth <= 840 ? 34 : 64;
         const targetAcronymSize = window.innerWidth <= 840 ? 10 : 13;
         const curWordSize = interpolate(easedGlide, [0, 1], [64, targetWordSize]);
@@ -267,14 +256,12 @@ export class LogoEntranceManager {
           ac.style.marginTop = `${interpolate(easedGlide, [0, 1], [8, 4])}px`;
         }
 
-        // Reveal header and site as it glides
         this.updateHeaderProgress(easedGlide);
 
         if (this.overlayEl) {
           this.overlayEl.style.opacity = `${1 - easedGlide}`;
         }
       } else {
-        // Done
         this.dock();
         return;
       }
@@ -284,7 +271,6 @@ export class LogoEntranceManager {
 
     this.rafId = requestAnimationFrame(tick);
 
-    // Fast-forward on user scroll
     const onUserScroll = () => {
       window.removeEventListener("wheel", onUserScroll);
       window.removeEventListener("touchstart", onUserScroll);
@@ -331,7 +317,6 @@ export class LogoEntranceManager {
     this.isAnimating = false;
     if (this.rafId) cancelAnimationFrame(this.rafId);
 
-    // Make native brand visible
     if (this.brandEl) {
       this.brandEl.style.opacity = "1";
       this.brandEl.style.visibility = "visible";

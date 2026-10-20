@@ -3,7 +3,7 @@ import { EASE, enter } from "../lib/scene";
 import { SpeedOption, SPEED_PROFILES } from "../lib/speed-profiles";
 
 export class TiersAnimationController {
-  private speed: SpeedOption = "medium";
+  private speed: SpeedOption = "fast";
   private containerEl: HTMLElement | null = null;
   private tiersSvg: SVGSVGElement | null = null;
   private tierEls: (SVGGraphicsElement | null)[] = [];
@@ -53,7 +53,6 @@ export class TiersAnimationController {
       }
     });
 
-    // Reset before viewport trigger
     this.setFrame(0);
 
     const config = SPEED_PROFILES[this.speed];
@@ -81,7 +80,6 @@ export class TiersAnimationController {
 
     if (this.containerEl) this.observer.observe(this.containerEl);
 
-    // Setup interactive task arrow clicks/hovers
     this.setupInteractivity();
   }
 
@@ -159,7 +157,6 @@ export class TiersAnimationController {
   private setFrame(frame: number) {
     if (this.activeHighlight) return;
 
-    // Staggered tier entrance (tier 1 to 4)
     const tierStarts = [0, 8, 16, 24];
     this.tierEls.forEach((el, i) => {
       if (!el) return;
@@ -170,7 +167,6 @@ export class TiersAnimationController {
       el.style.transform = `translate3d(0, ${rise}px, 0)`;
     });
 
-    // Connecting arrows
     const arrowKeys = ["asr", "diac", "g2p", "a2p"];
     const arrowStarts = [30, 36, 42, 48];
     arrowKeys.forEach((key, i) => {

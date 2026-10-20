@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createRoot, Root } from "react-dom/client";
-import { Fig1Figure, PerVariety } from "../figures/Fig1Figure";
+import { Fig1Figure, PerVariety, perVariety } from "../figures/Fig1Figure";
 import { interpolate } from "remotion";
 import { EASE } from "../lib/scene";
 import { SpeedOption, SPEED_PROFILES } from "../lib/speed-profiles";
@@ -9,18 +9,8 @@ interface MapControllerProps {
   speed: SpeedOption;
 }
 
-const VARIETIES = [
-  { id: 1, name: "Lebanese", phon: "ʾeltillak", flag: "🇱🇧" },
-  { id: 2, name: "Syrian", phon: "ʾəltillak", flag: "🇸🇾" },
-  { id: 3, name: "Pal. Rural", phon: "kultlak", flag: "🇵🇸" },
-  { id: 4, name: "Pal. Urban", phon: "ʾultillak", flag: "🇵🇸" },
-  { id: 5, name: "Jordanian", phon: "gultlak", flag: "🇯🇴" },
-] as const;
-
 export const AnimatedMap: React.FC<MapControllerProps> = ({ speed }) => {
   const [progress, setProgress] = useState(0); // 0 to 1
-  const [selectedVariety, setSelectedVariety] = useState<number | null>(null);
-  const [isPlayingTour, setIsPlayingTour] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const hasAnimatedRef = useRef(false);
 
@@ -70,25 +60,6 @@ export const AnimatedMap: React.FC<MapControllerProps> = ({ speed }) => {
     return () => observer.disconnect();
   }, [speed]);
 
-  const playTour = () => {
-    if (isPlayingTour) return;
-    setIsPlayingTour(true);
-    let step = 1;
-    setSelectedVariety(1);
-
-    const stepMs = speed === "slow" ? 1800 : speed === "fast" ? 900 : 1300;
-    const timer = setInterval(() => {
-      step++;
-      if (step <= 5) {
-        setSelectedVariety(step);
-      } else {
-        setSelectedVariety(null);
-        setIsPlayingTour(false);
-        clearInterval(timer);
-      }
-    }, stepMs);
-  };
-
   // Progress segments (0 to 1)
   const mapProgress = interpolate(progress, [0, 0.22], [0, 1], {
     extrapolateLeft: "clamp",
@@ -126,79 +97,11 @@ export const AnimatedMap: React.FC<MapControllerProps> = ({ speed }) => {
     5: interpolate(progress, [0.84, 0.98], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE }),
   };
 
-  const labelStrength: PerVariety = {
-    1: selectedVariety === null || selectedVariety === 1 ? 1 : 0.28,
-    2: selectedVariety === null || selectedVariety === 2 ? 1 : 0.28,
-    3: selectedVariety === null || selectedVariety === 3 ? 1 : 0.28,
-    4: selectedVariety === null || selectedVariety === 4 ? 1 : 0.28,
-    5: selectedVariety === null || selectedVariety === 5 ? 1 : 0.28,
-  };
+  const labelStrength: PerVariety = perVariety(1);
 
   return (
     <div ref={containerRef} style={{ width: "100%", position: "relative" }}>
-      {/* Interactive Variety Filter Toolbar */}
-      <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "8px",
-        marginBottom: "14px",
-        alignItems: "center"
-      }}>
-        <button
-          onClick={() => setSelectedVariety(null)}
-          style={{
-            padding: "5px 12px",
-            borderRadius: "16px",
-            border: "1px solid var(--ink, #201C3C)",
-            background: selectedVariety === null ? "var(--ink, #201C3C)" : "transparent",
-            color: selectedVariety === null ? "var(--ivory, #FCF9F1)" : "var(--ink, #201C3C)",
-            font: "600 12px/1.2 var(--head)",
-            cursor: "pointer",
-            transition: "all 0.2s ease",
-          }}
-        >
-          All 5 Varieties
-        </button>
-        {VARIETIES.map((v) => (
-          <button
-            key={v.id}
-            onClick={() => setSelectedVariety(v.id)}
-            style={{
-              padding: "5px 12px",
-              borderRadius: "16px",
-              border: "1px solid var(--ink, #201C3C)",
-              background: selectedVariety === v.id ? "var(--flame, #E84226)" : "transparent",
-              borderColor: selectedVariety === v.id ? "var(--flame, #E84226)" : "rgba(32,28,60,0.3)",
-              color: selectedVariety === v.id ? "#ffffff" : "var(--ink, #201C3C)",
-              font: "500 12px/1.2 var(--head)",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}
-          >
-            {v.flag} {v.name}: <i>{v.phon}</i>
-          </button>
-        ))}
-        <button
-          onClick={playTour}
-          disabled={isPlayingTour}
-          style={{
-            marginLeft: "auto",
-            padding: "5px 14px",
-            borderRadius: "16px",
-            border: "none",
-            background: "var(--ember, #E06945)",
-            color: "#ffffff",
-            font: "600 12px/1.2 var(--head)",
-            cursor: isPlayingTour ? "default" : "pointer",
-            opacity: isPlayingTour ? 0.6 : 1,
-            transition: "all 0.2s ease",
-          }}
-        >
-          {isPlayingTour ? "Playing Tour..." : "▶ Walkthrough Tour"}
-        </button>
-      </div>
-
-      {/* Remotion Fig1Figure SVG Canvas */}
+      {/* Remotion Fig1Figure SVG Canvas (clean autonomous layout, no walkthrough guide) */}
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <Fig1Figure
           height={figureHeight}
